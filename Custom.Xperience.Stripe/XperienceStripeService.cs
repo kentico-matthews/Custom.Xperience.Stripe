@@ -32,27 +32,17 @@ namespace Custom.Xperience.Stripe
             return options;
         }
 
+
+        /// <summary>
+        /// Prepares async session options for a Stripe checkout session
+        /// </summary>
+        /// <param name="order">The kentico OrderInfo object for which payment is required</param>
+        /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
+        /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
+        /// <returns>Session options for creating a Stripe Checkout session.</returns>
         public virtual SessionCreateOptions getDelayedOptions(OrderInfo order, string successUrl, string cancelUrl)
         {
             var lineItems = GetLineItems(order);
-
-
-
-            //var intentOptions = new PaymentIntentCreateOptions
-            //{
-            //    Currency = CurrencyInfo.Provider.Get(order.OrderCurrencyID).CurrencyCode,
-            //    PaymentMethodTypes = new List<string> { "card_present" },
-            //    CaptureMethod = "manual",
-            //    PaymentMethodOptions = new PaymentIntentPaymentMethodOptionsOptions
-            //    {
-            //        CardPresent = new PaymentIntentPaymentMethodOptionsCardPresentOptions
-            //        {
-            //            RequestExtendedAuthorization = true,
-            //        },
-            //    },
-            //};
-            //var service = new PaymentIntentService();
-            //service.Create(intentOptions);
 
             var options = new SessionCreateOptions
             {
@@ -69,6 +59,8 @@ namespace Custom.Xperience.Stripe
             return options;
         }
 
+
+        //Lists items for the checkout description, as kentico-side calculation requires a single line item in stripe
         protected virtual string CreateDescription(int orderId)
         {
             string description = String.Empty;
@@ -100,6 +92,8 @@ namespace Custom.Xperience.Stripe
             return description.Equals(String.Empty) ? ResHelper.GetString("custom.stripe.checkout.defaultdescription") : description;
         }
 
+
+        //Create line item set for the stripe checkout
         protected virtual List<SessionLineItemOptions> GetLineItems(OrderInfo order)
         {
             //Since calculation of discounts, taxes, etc. is handled on kentico side, we must submit the whole order as a signleline item
@@ -114,6 +108,8 @@ namespace Custom.Xperience.Stripe
                         Name = ResHelper.GetString("custom.stripe.checkout.payment"),
                         Description = CreateDescription(order.OrderID)
                     },
+
+                    //stripe uses cents or analogous units of whichever currency is being used
                     UnitAmountDecimal = order.OrderGrandTotal * 100
                 },
                 Quantity = 1
