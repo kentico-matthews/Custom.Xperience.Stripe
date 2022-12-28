@@ -486,6 +486,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CaptureHelper\CaptureHelper.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\StripeController.cs" />
     <Compile Include="ModuleRegistratin\XperienceStripeEndpointModule.cs" />
@@ -498,5 +499,6 @@
   <ItemGroup>
     <Analyzer Include="..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\AWSSDK.S3.3.5.1.4\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,6 @@
 ﻿using System.Net.Http;
 using System.Net;
 using System.Web.Http;
-using Newtonsoft.Json.Linq;
 using CMS.Core;
 using System;
 using Stripe;
@@ -17,14 +16,11 @@ namespace Custom.Xperience.Stripe.Endpoint
 {
     public class StripeController : ApiController
     {
-        private const string WEBHOOK_SECRET_SETTING = "CustomStripeWebhookSecret";
-
         [HttpPost]
         public virtual async Task<HttpResponseMessage> Update()
         {
             var json = await new StreamReader(HttpContext.Current.Request.InputStream, HttpContext.Current.Request.ContentEncoding).ReadToEndAsync();
-            var stripeEvent = EventUtility.ParseEvent(json.ToString());
-            var webhookSecret = Service.Resolve<IAppSettingsService>()[WEBHOOK_SECRET_SETTING];
+            var webhookSecret = Service.Resolve<IAppSettingsService>()["CustomStripeWebhookSecret"];
             if (!String.IsNullOrEmpty(webhookSecret))
             {
                 try
@@ -34,7 +30,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                         var signatureHeader = values.First();
                         
                         //create event object, and check if webhook secret key matchees
-                        stripeEvent = EventUtility.ConstructEvent(json, signatureHeader, webhookSecret);
+                        var stripeEvent = EventUtility.ConstructEvent(json, signatureHeader, webhookSecret);
 
                         if (stripeEvent.Data.Object.Object == "checkout.session")
                         {
@@ -109,6 +105,8 @@ namespace Custom.Xperience.Stripe.Endpoint
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
+
+
         protected virtual void UpdateOrderStatusToPaid(OrderInfo order)
         {
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
@@ -125,6 +123,8 @@ namespace Custom.Xperience.Stripe.Endpoint
                 Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paidstatusnotset"));
             }
         }
+
+
         protected virtual void UpdateOrderStatusToFailed(OrderInfo order)
         {
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
@@ -141,6 +141,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                 Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.failedstatusnotset"));
             }
         }
+
 
         protected virtual void UpdateOrderStatusToAuthorized(OrderInfo order)
         {
@@ -159,14 +160,17 @@ namespace Custom.Xperience.Stripe.Endpoint
             }
         }
 
+
         protected virtual OrderInfo GetOrderFromPaymentIntent(string paymentIntentID)
         {
             var orders = OrderInfo.Provider.Get().WhereLike("OrderCustomData", $"%{paymentIntentID}%");           
             return orders.First();
         }
+
+
         protected virtual OrderInfo GetOrderFromCheckoutSession(string clientReferenceID)
         {
-            var order = OrderInfo.Provider.Get().WhereEquals("OrderID", clientReferenceID).First();
+            var orders = OrderInfo.Provider.Get().WhereEquals("OrderID", clientReferenceID);
             return orders.First();
         }
     }
