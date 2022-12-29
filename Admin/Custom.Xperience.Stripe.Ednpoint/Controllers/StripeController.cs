@@ -58,6 +58,10 @@ namespace Custom.Xperience.Stripe.Endpoint
                                         UpdateOrderStatusToFailed(order);
                                         order.OrderIsPaid = false;
                                     }
+                                    else
+                                    {
+                                        Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
+                                    }
                                     order.Update();
                                 }
                             }
@@ -78,6 +82,10 @@ namespace Custom.Xperience.Stripe.Endpoint
                                 {
                                     UpdateOrderStatusToFailed(order);
                                     order.OrderIsPaid = false;
+                                }
+                                else
+                                {
+                                    Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
                                 }
                             }
                             order.Update();
@@ -156,7 +164,7 @@ namespace Custom.Xperience.Stripe.Endpoint
             }
             else
             {
-                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.failedstatusnotset"));
+                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.authorizedstatusnotset"));
             }
         }
 

@@ -65,7 +65,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                         }
                         else
                         {
-                            Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"));
+                            Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
                         }
                     }
                 }

@@ -105,7 +105,7 @@ namespace Custom.Xperience.Stripe
                     Currency = CurrencyInfo.Provider.Get(order.OrderCurrencyID).CurrencyCode,
                     ProductData = new SessionLineItemPriceDataProductDataOptions
                     {
-                        Name = ResHelper.GetString("custom.stripe.checkout.payment"),
+                        Name = ResHelper.GetString("custom.stripe.checkout.paymentname"),
                         Description = CreateDescription(order.OrderID)
                     },
 
