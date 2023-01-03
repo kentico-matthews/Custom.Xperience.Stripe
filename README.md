@@ -57,3 +57,41 @@ The Orders will be updated based on their payment status in Stripe, through an e
 ---
 
 ## Example
+
+```
+var cart = shoppingService.GetCurrentShoppingCart();
+
+...
+
+//Check if the shopping cart is set to use the Stripe payment option.
+var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
+if (cart.ShoppingCartPaymentOptionID == paymentOption.PaymentOptionID)
+{
+	//Convert the ShoppingCartInfo object to an OrderInfo object.
+	var order = shoppingService.CreateOrder();
+
+
+	//Create stripe checkout options based on whether or not we want delayed capture.
+	SessionCreateOptions options;
+	if (useDelayedCapture)
+	{
+		//Creates options for an asynchronous checkout session, where payment is not captured immediately at checkout.
+		options = xperienceStripeService.getDelayedOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
+	}
+	else
+	{
+		//Creates options for a standard checkout session, where paymnet is captured when the cusotmer completes the checkout.
+		options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
+	}
+	
+	
+	//Create Stripe checkout session.
+	var service = new SessionService();
+	Session session = service.Create(options);
+
+	//Redirect to Stripe checkout.
+	Response.Headers.Add("Location", session.Url);
+	return new StatusCodeResult(303);
+}
+```
+

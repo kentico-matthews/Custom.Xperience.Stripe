@@ -5,6 +5,7 @@ using CMS.Ecommerce;
 using CMS.Helpers;
 using Custom.Xperience.Stripe.Endpoint;
 using Stripe;
+using System;
 using System.Linq;
 using System.Web.Http;
 
@@ -27,32 +28,38 @@ namespace Custom.Xperience.Stripe.Endpoint
                 defaults: new { controller = "Stripe", action = "Update" }
             );
 
+            //Register event handler
             OrderInfo.TYPEINFO.Events.Update.Before += Order_Update_Before;
         }
 
 
         private void Order_Update_Before(object sender, ObjectEventArgs e)
         {
-            //only do anything if the setting is configured            
+            //only do anything if the setting is configured, and get the ID of the order status in Settings that triggers order capture            
             if(int.TryParse(SettingsKeyInfoProvider.GetValue("OrderStatusForCapture"), out int captureStatusID) && captureStatusID > 0)
             {
                 var order = (OrderInfo)e.Object;
                 var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
                 int approvedStatusID = 0;
+
                 if (paymentOption != null)
                 {
                     approvedStatusID = OrderStatusInfo.Provider.Get(paymentOption.PaymentOptionAuthorizedOrderStatusID).StatusID;
                 }
 
+                //Get previous and current status for the updated order.
                 int originalStatus = (int)order.GetOriginalValue("OrderStatusID");
                 int currentStatus = order.OrderStatusID;
 
+                //If the order is in the status that triggers payment capture.
                 if (currentStatus == captureStatusID)
                 {
+                    //If the order was previously approved.
                     if (originalStatus == approvedStatusID)
                     {
+                        //Get the payment intent from the order's custom data.
                         var paymentIntentID = (string)order.OrderCustomData.GetValue("StripePaymentIntentID");
-                        if(!string.IsNullOrEmpty(paymentIntentID))
+                        if(!String.IsNullOrEmpty(paymentIntentID))
                         {
                             try
                             {
@@ -69,6 +76,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                         }
                     }
                 }
+
             }
         }
     }
