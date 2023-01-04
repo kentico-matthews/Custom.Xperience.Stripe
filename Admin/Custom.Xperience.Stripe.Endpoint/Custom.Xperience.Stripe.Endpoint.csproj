@@ -489,7 +489,7 @@
     <Compile Include="CaptureHelper\CaptureHelper.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\StripeController.cs" />
-    <Compile Include="ModuleRegistratin\XperienceStripeEndpointModule.cs" />
+    <Compile Include="ModuleRegistration\XperienceStripeEndpointModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

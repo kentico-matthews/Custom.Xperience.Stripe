@@ -63,6 +63,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                         {
                             try
                             {
+                                //Capture the payment.
                                 CaptureHelper.CapturePayment(paymentIntentID);
                             }
                             catch(StripeException ex)
