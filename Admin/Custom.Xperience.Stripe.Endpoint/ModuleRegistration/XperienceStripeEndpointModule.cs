@@ -22,20 +22,21 @@ namespace Custom.Xperience.Stripe.Endpoint
         {
             base.OnInit();
 
+            //Map route to endpoint.
             GlobalConfiguration.Configuration.Routes.MapHttpRoute(
                 "xperience-stripe",
                 "xperience-stripe/updateorder",
                 defaults: new { controller = "Stripe", action = "Update" }
             );
 
-            //Register event handler
+            //Register event handler.
             OrderInfo.TYPEINFO.Events.Update.Before += Order_Update_Before;
         }
 
 
         private void Order_Update_Before(object sender, ObjectEventArgs e)
         {
-            //only do anything if the setting is configured, and get the ID of the order status in Settings that triggers order capture            
+            //Only do anything if the setting is configured, and get the ID of the order status in Settings that triggers order capture.
             if(int.TryParse(SettingsKeyInfoProvider.GetValue("OrderStatusForCapture"), out int captureStatusID) && captureStatusID > 0)
             {
                 var order = (OrderInfo)e.Object;

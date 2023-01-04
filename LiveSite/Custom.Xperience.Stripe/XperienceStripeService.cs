@@ -60,31 +60,33 @@ namespace Custom.Xperience.Stripe
         }
 
 
-        //Lists items for the checkout description, as kentico-side calculation requires a single line item in stripe
+        //Lists items for the checkout description, as all the calculation happens on the Kentico side, meaning separate line items can't be used.
         protected virtual string CreateDescription(int orderId)
         {
             string description = String.Empty;
-            var orderItemsQuery = OrderItemInfo.Provider.Get().WhereEquals("OrderItemOrderID", orderId);
+            var orderItemsQuery = OrderItemInfo.Provider.Get()
+                .Columns("OrderItemParentGUID", "OrderItemSKUName", "OrderItemGUID", "OrderItemOrderID")
+                .WhereEquals("OrderItemOrderID", orderId);
 
-            //execute the query so that multiple database calls don't happen when we filter the data
+            //Execute the query now, so that multiple database calls don't happen when filtering the data
             var orderItems = orderItemsQuery.GetEnumerableTypedResult().ToArray();
 
             for(int i = 0; i < orderItems.Length; i++)
             {
-                //if the order item is not a product option
+                //Check if the item is a "parent" product, rather than a product option.
                 if (orderItems[i].OrderItemParentGUID == System.Guid.Empty)
                 {
-                    //add the product name
+                    //Add the product name.
                     string name = String.Empty;
                     name += orderItems[i].OrderItemSKUName;
                     
-                    //find and list any "child" product options for the item
+                    //Find and list any "child" product options for the item.
                     var options = orderItems.Where(x => x.OrderItemParentGUID.Equals(orderItems[i].OrderItemGUID));
                     foreach (OrderItemInfo option in options)
                     {
                         name += $" ({option.OrderItemSKUName})";
                     }
-                    //if the previous stuff resulted in any text, and we're not on the last line add a delimiter (line breaks don't work)
+                    //If the previous stuff resulted in any text, and we're not on the last line, add a delimiter (line breaks don't work).
                     name += name.Equals(String.Empty) || (i == orderItems.Length - 1) ? String.Empty : ", ";
                     description += name;
                 }
@@ -93,11 +95,12 @@ namespace Custom.Xperience.Stripe
         }
 
 
-        //Create line item set for the stripe checkout
+        //Create line item list for the stripe checkout.
         protected virtual List<SessionLineItemOptions> GetLineItems(OrderInfo order)
         {
-            //Since calculation of discounts, taxes, etc. is handled on kentico side, we must submit the whole order as a signleline item
             var lineItems = new List<SessionLineItemOptions>();
+
+            //Only use one line - separate lines requires calculation to happen on Stripe side, which would negate Kentico calculation pipeline.
             lineItems.Add(new SessionLineItemOptions
             {
                 PriceData = new SessionLineItemPriceDataOptions
@@ -109,7 +112,7 @@ namespace Custom.Xperience.Stripe
                         Description = CreateDescription(order.OrderID)
                     },
 
-                    //stripe uses cents or analogous units of whichever currency is being used
+                    //Stripe uses cents or analogous units of whichever currency is being used.
                     UnitAmountDecimal = order.OrderGrandTotal * 100
                 },
                 Quantity = 1
