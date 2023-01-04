@@ -42,7 +42,7 @@ The Orders will be updated based on their payment status in Stripe, through an e
    * Order status if payment succeeds
    * Order status if payment is authorized
    * Order status if payment fails
-1. Download the import package **Custom.Xperience.Stripe.zip** from the **Import Package** folder in this repository and copy it into the **~/CMSSiteUtils/Import** folder of your admin site.
+1. Download the import package **Custom.Xperience.Stripe.zip** from the **Admin\Import Package** folder in this repository and copy it into the **~/CMSSiteUtils/Import** folder of your admin site.
 1. Open the **Sites** application, and click the button to **Import site or objects**.
 1. Choose the import package and pre-select all objects, then complete the import.
 1. If you plan on using delayed capture for payments, go to **Settings > Integration > Stripe**, and set an order status that will trigger the capture of an order.
@@ -57,7 +57,7 @@ The Orders will be updated based on their payment status in Stripe, through an e
 ---
 
 ## Examples
-The following example demonstrates the use of the stripe integration in a checkout controller. (It utilizes both direct capture and delayed capture, choosing which to use based on a boolean. This is not necessary, and whichever option you prefer can be used on its own.)
+The following example demonstrates the use of the stripe integration in a checkout controller on the live site. (It utilizes both direct capture and delayed capture, choosing which to use based on a boolean. This is not necessary, and whichever option you prefer can be used on its own.)
 
 ```c#
 private readonly IShoppingService shoppingService;
@@ -116,6 +116,7 @@ public ActionResult Pay(PayViewModel model)
 	}
 }
 ```
+
 The above example requires XperienceStripeService to be registered with your IoC container as an implementation of IXperienceStripeService.
 
 If you are not using Dependency Injection, you can simply instantiate an instance of XperienceStripeService.
@@ -126,3 +127,31 @@ var xperienceStripeService = new XperienceStripeService();
 var options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
 ```
 
+If you prefer to manually capture an order's payment, rather than using the setting to do so when the order reaches a certain status, you can use code like this somewhere in the admin solution, for example, in a custom scheduled task.
+
+```c#
+//Get the order
+var order = OrderInfo.Provider.Get(100)
+
+//Get the Stripe payment intent ID from the order's custom data.
+var paymentIntentID = (string)order.OrderCustomData.GetValue("StripePaymentIntentID");
+
+if(!String.IsNullOrEmpty(paymentIntentID))
+{
+	try
+	{
+		//Capture the payment.
+		CaptureHelper.CapturePayment(paymentIntentID);
+	}
+	catch(StripeException ex)
+	{
+		//Capture failed, handle the exception.
+		//...
+	}
+}
+else
+{
+	//No payment intent reference found, handle the exception.
+	//...
+}
+```
