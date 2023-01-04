@@ -31,7 +31,7 @@ The Orders will be updated based on their payment status in Stripe, through an e
 1. In the Stripe dashboard, go to **Developers > API Keys** and reveal and copy the **Secret key**.
 1. Add your secret key from stripe under the **appSettings** section of your **web.config** file, and to your live site's **appconfig.json** (or other custom configuration) file with the key *CustomStripeSecretKey*.
 
-### **Admin**
+### **Kentico Xperience Admin**
 1. Install the [ADMINPACKAGENAME] package and build your solution
 1. Open the **Store configuration** or **Multistore Configuration** app in Xperience 13, whichever you're using for your shop.
 1. Go to the **Payment Methods** Tab.
@@ -56,42 +56,73 @@ The Orders will be updated based on their payment status in Stripe, through an e
 
 ---
 
-## Example
+## Examples
+The following example demonstrates the use of the stripe integration in a checkout controller. (It utilizes both direct capture and delayed capture, choosing which to use based on a boolean. This is not necessary, and whichever option you prefer can be used on its own.)
 
-```
-var cart = shoppingService.GetCurrentShoppingCart();
+```c#
+private readonly IShoppingService shoppingService;
+//...
+private readonly IXperienceStripeService xperienceStripeService;
 
-...
-
-//Check if the shopping cart is set to use the Stripe payment option.
-var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
-if (cart.ShoppingCartPaymentOptionID == paymentOption.PaymentOptionID)
+public CheckoutController(IShoppingService shoppingService, /*...,*/ IXperienceStripeService xperienceStripeService)
 {
-	//Convert the ShoppingCartInfo object to an OrderInfo object.
-	var order = shoppingService.CreateOrder();
-
-
-	//Create stripe checkout options based on whether or not we want delayed capture.
-	SessionCreateOptions options;
-	if (useDelayedCapture)
-	{
-		//Creates options for an asynchronous checkout session, where payment is not captured immediately at checkout.
-		options = xperienceStripeService.getDelayedOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
-	}
-	else
-	{
-		//Creates options for a standard checkout session, where paymnet is captured when the cusotmer completes the checkout.
-		options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
-	}
-	
-	
-	//Create Stripe checkout session.
-	var service = new SessionService();
-	Session session = service.Create(options);
-
-	//Redirect to Stripe checkout.
-	Response.Headers.Add("Location", session.Url);
-	return new StatusCodeResult(303);
+	this.shoppingService = shoppingService;
+	//...
+	this.xperienceStripeService = xperienceStripeService;
 }
+
+[HttpPost]
+[ValidateAntiForgeryToken]
+public ActionResult Pay(PayViewModel model)
+{
+	var cart = shoppingService.GetCurrentShoppingCart();
+
+	//...
+
+	//Check if the shopping cart is set to use the Stripe payment option.
+	var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
+	if (cart.ShoppingCartPaymentOptionID == paymentOption.PaymentOptionID)
+	{
+		try{
+			//Convert the ShoppingCartInfo object to an OrderInfo object.
+			var order = shoppingService.CreateOrder();
+
+			//Create stripe checkout options based on whether or not we want delayed capture.
+			SessionCreateOptions options;
+			if (useDelayedCapture)
+			{
+				//Creates options for an asynchronous checkout session, where payment is not captured immediately at checkout (delayed capture).
+				options = xperienceStripeService.getDelayedOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
+			}
+			else
+			{
+				//Creates options for a standard checkout session, where paymnet is captured when the cusotmer completes the checkout (direct capture).
+				options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
+			}
+			
+			//Create Stripe checkout session.
+			var service = new SessionService();
+			Session session = service.Create(options);
+
+			//Redirect to Stripe checkout.
+			Response.Headers.Add("Location", session.Url);
+			return new StatusCodeResult(303);
+		}
+		catch(Exception ex)
+		{
+			//...
+			return new StatusCodeResult(500);
+		}
+	}
+}
+```
+The above example requires XperienceStripeService to be registered with your IoC container as an implementation of IXperienceStripeService.
+
+If you are not using Dependency Injection, you can simply instantiate an instance of XperienceStripeService.
+
+```c#
+var xperienceStripeService = new XperienceStripeService();
+
+var options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
 ```
 
