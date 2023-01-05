@@ -37,48 +37,56 @@ namespace Custom.Xperience.Stripe.Endpoint
         private void Order_Update_Before(object sender, ObjectEventArgs e)
         {
             //Only do anything if the setting is configured, and get the ID of the order status in Settings that triggers order capture.
-            if(int.TryParse(SettingsKeyInfoProvider.GetValue("OrderStatusForCapture"), out int captureStatusID) && captureStatusID > 0)
-            {
+            if (int.TryParse(SettingsKeyInfoProvider.GetValue("OrderStatusForCapture"), out int captureStatusID) && captureStatusID > 0)
+            {                
                 var order = (OrderInfo)e.Object;
                 var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
-                int approvedStatusID = 0;
+                if(order.OrderPaymentOptionID == paymentOption.PaymentOptionID)
+                { 
+                    int approvedStatusID = 0;
 
-                if (paymentOption != null)
-                {
-                    approvedStatusID = OrderStatusInfo.Provider.Get(paymentOption.PaymentOptionAuthorizedOrderStatusID).StatusID;
-                }
+                    if (paymentOption != null)
+                    {
+                        approvedStatusID = OrderStatusInfo.Provider.Get(paymentOption.PaymentOptionAuthorizedOrderStatusID).StatusID;
+                    }
 
-                //Get previous and current status for the updated order.
-                int originalStatus = (int)order.GetOriginalValue("OrderStatusID");
-                int currentStatus = order.OrderStatusID;
+                    //Get previous and current status for the updated order.
+                    int originalStatus = (int)order.GetOriginalValue("OrderStatusID");
+                    int currentStatus = order.OrderStatusID;
 
-                //If the order is in the status that triggers payment capture.
-                if (currentStatus == captureStatusID)
-                {
-                    //If the order was previously approved.
-                    if (originalStatus == approvedStatusID)
+                    //If the order is in the status that triggers payment capture.
+                    if (currentStatus == captureStatusID)
                     {
                         //Get the payment intent from the order's custom data.
                         var paymentIntentID = (string)order.OrderCustomData.GetValue("StripePaymentIntentID");
-                        if(!String.IsNullOrEmpty(paymentIntentID))
-                        {
-                            try
+
+                        //If the order was previously approved.
+                        if (originalStatus == approvedStatusID)
+                        { 
+                            if (!String.IsNullOrEmpty(paymentIntentID))
                             {
-                                //Capture the payment.
-                                CaptureHelper.CapturePayment(paymentIntentID);
+                                try
+                                {
+                                    //Capture the payment.
+                                    CaptureHelper.CapturePayment(paymentIntentID);
+                                }
+                                catch (StripeException ex)
+                                {
+                                    Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", "Stripe", ex.Message + "\r\n" + ex.StackTrace);
+                                    order.OrderStatusID = paymentOption.PaymentOptionFailedOrderStatusID;
+                                }
                             }
-                            catch(StripeException ex)
+                            else
                             {
-                                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe","Stripe", ex.Message + "\r\n" + ex.StackTrace);
+                                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
                             }
                         }
                         else
                         {
-                            Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
+                            Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentnotapproved"), $"OrderID: {order.OrderID}, StripePaymentIntentID: {paymentIntentID ?? "null"}");
                         }
                     }
                 }
-
             }
         }
     }
