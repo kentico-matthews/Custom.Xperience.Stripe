@@ -9,6 +9,8 @@ With this library, you'll be able to accept payments both through direct capture
 
 The Orders will be updated based on their payment status in Stripe, through an endpoint in the admin application.
 
+If the **Order status for capture** setting under **Settings > Integration > Stripe** is configured, the capture of approved payments can be triggered by setting orders to the specified status.
+
 ## Setup
 ---
 ### **Stripe Dashboard**
