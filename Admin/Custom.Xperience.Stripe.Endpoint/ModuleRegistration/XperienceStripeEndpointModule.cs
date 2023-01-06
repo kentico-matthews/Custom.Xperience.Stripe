@@ -33,14 +33,14 @@ namespace Custom.Xperience.Stripe.Endpoint
             OrderInfo.TYPEINFO.Events.Update.Before += Order_Update_Before;
         }
 
-
+        
         private void Order_Update_Before(object sender, ObjectEventArgs e)
         {
             //Only do anything if the setting is configured, and get the ID of the order status in Settings that triggers order capture.
             if (int.TryParse(SettingsKeyInfoProvider.GetValue("OrderStatusForCapture"), out int captureStatusID) && captureStatusID > 0)
             {                
                 var order = (OrderInfo)e.Object;
-                var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
+                PaymentOptionInfo paymentOption = CacheHelper.Cache(cs => LoadOption(cs), new CacheSettings(60, "customxperiencestripe|paymentoption"));
                 if(order.OrderPaymentOptionID == paymentOption.PaymentOptionID)
                 { 
                     int approvedStatusID = 0;
@@ -88,6 +88,14 @@ namespace Custom.Xperience.Stripe.Endpoint
                     }
                 }
             }
+        }
+
+        //Cache the payment option that is compared to each order to minimize extraneous database calls.
+        private PaymentOptionInfo LoadOption(CacheSettings cs)
+        {
+            PaymentOptionInfo paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
+            cs.CacheDependency = CacheHelper.GetCacheDependency("ecommerce.paymentoption|byname|Stripe");
+            return paymentOption;
         }
     }
 }
