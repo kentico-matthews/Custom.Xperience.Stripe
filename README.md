@@ -1,15 +1,15 @@
 # Xperience 13 Stripe Integration
 
 ## Summary
-This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store.
+This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store.(Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff.)
 
-It uses [Stripe Checkout](https://stripe.com/payments/checkout), where the customer enters their payment data into a form hosted by Stripe, meaning your servers do not need to touch their card information.
+This repository uses [Stripe Checkout](https://stripe.com/payments/checkout), where the customer enters their payment data into a form hosted by Stripe, meaning your servers do not need to touch their card information.
 
 With this library, you'll be able to accept payments both through direct capture, and delayed capture of payment within the standard (typically 7-day) authorization window.
 
 The Orders will be updated based on their payment status in Stripe, through an endpoint in the admin application.
 
-If the **Order status for capture** setting under **Settings > Integration > Stripe** is configured, the capture of approved payments can be triggered by setting orders to the specified status.
+If the **Order status for capture** setting under **Settings > Integration > Stripe** is configured, the capture of approved delayed capture payments can be triggered by setting orders to the specified status.
 
 ## Setup
 ---
