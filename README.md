@@ -1,7 +1,7 @@
 # Xperience 13 Stripe Integration
 
 ## Summary
-This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store.(Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff.)
+This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store. (Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff.)
 
 This repository uses [Stripe Checkout](https://stripe.com/payments/checkout), where the customer enters their payment data into a form hosted by Stripe, meaning your servers do not need to touch their card information.
 
