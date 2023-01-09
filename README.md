@@ -1,7 +1,7 @@
 # Xperience 13 Stripe Integration
 
 ## Summary
-This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store. (Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff.)
+This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store. (Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff. If you have problems, please create an issue in this repository rather than contacting Kentico support.)
 
 This repository uses [Stripe Checkout](https://stripe.com/payments/checkout), where the customer enters their payment data into a form hosted by Stripe, meaning your servers do not need to touch their card information.
 
@@ -34,7 +34,7 @@ If the **Order status for capture** setting under **Settings > Integration > Str
 1. Add your secret key from stripe under the **appSettings** section of your **web.config** file, and to your live site's **appconfig.json** (or other custom configuration) file with the key *CustomStripeSecretKey*.
 
 ### **Kentico Xperience Admin**
-1. Install the [ADMINPACKAGENAME] package and build your solution
+1. Install the [ADMINPACKAGENAME] and [Stripe.net](https://www.nuget.org/packages/Stripe.net/) NuGet packages and build your solution
 1. Open the **Store configuration** or **Multistore Configuration** app in Xperience 13, whichever you're using for your shop.
 1. Go to the **Payment Methods** Tab.
 1. Click the button to create a **New payment method**.
@@ -49,7 +49,7 @@ If the **Order status for capture** setting under **Settings > Integration > Str
 1. Choose the import package and pre-select all objects, then complete the import.
 1. If you plan on using delayed capture for payments, go to **Settings > Integration > Stripe**, and set an order status that will trigger the capture of an order.
 
-### **Live site**
+### **Live Site**
 1. Install the [LIVESITEPACKAGENAME] package and build your solution
 1. (Optional) Register XperienceStripeService as the implementation of IXperienceStripeService with your IoC container so that you can inject it
 1. During your checkout, check whether the payment method of the current shopping cart is set to the one you created for Stripe
@@ -157,3 +157,11 @@ else
 	//...
 }
 ```
+
+---
+## Development
+If this repository doesn't do exactly what you need, there are two main approaches to customize it.
+### **Extending the classes**
+Many of the classes in this repository contain virtual members which can be overridden in child classes. If you have a relatively small or simple customization to make, it may be easiest to install the packages normally, overriding any necessary methods and substituting in your own business logic.
+### **Forking the rpository**
+If you have a more in-depth or fundamental changes that you need to make, you can fork (or just download and modify) the repository and make whatever structural changes you need. In this case, you'll need to add the live site and admin class library projects from the repository to the appropriate solutions in visual studio, and then add a reference from the main project to the class library, rather than installing the nuget package.
