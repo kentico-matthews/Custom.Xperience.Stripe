@@ -37,7 +37,7 @@ namespace Custom.Xperience.Stripe.Endpoint
         private void Order_Update_Before(object sender, ObjectEventArgs e)
         {
             //Only do anything if the setting is configured, and get the ID of the order status in Settings that triggers order capture.
-            if (int.TryParse(SettingsKeyInfoProvider.GetValue("OrderStatusForCapture"), out int captureStatusID) && captureStatusID > 0)
+            if (int.TryParse(CacheHelper.Cache(cs => LoadSetting(cs), new CacheSettings(60, "customxperiencestripe|settingkey")), out int captureStatusID) && captureStatusID > 0)
             {                
                 var order = (OrderInfo)e.Object;
                 PaymentOptionInfo paymentOption = CacheHelper.Cache(cs => LoadOption(cs), new CacheSettings(60, "customxperiencestripe|paymentoption"));
@@ -96,6 +96,13 @@ namespace Custom.Xperience.Stripe.Endpoint
             PaymentOptionInfo paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
             cs.CacheDependency = CacheHelper.GetCacheDependency("ecommerce.paymentoption|byname|Stripe");
             return paymentOption;
+        }
+
+        private string LoadSetting(CacheSettings cs)
+        {
+            string setting = SettingsKeyInfoProvider.GetValue("OrderStatusForCapture");
+            cs.CacheDependency = CacheHelper.GetCacheDependency("cms.settingskey|byname|OrderStatusForCapture");
+            return setting;
         }
     }
 }

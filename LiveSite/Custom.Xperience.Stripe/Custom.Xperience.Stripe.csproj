@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Description>An open-source, community integration for using Stripe checkout in Kentco Xperience 13</Description>
   </PropertyGroup>
 
   <ItemGroup>
