@@ -163,5 +163,10 @@ else
 If this repository doesn't do exactly what you need, there are two main approaches to customize it.
 ### **Extending the classes**
 Many of the classes in this repository contain virtual members which can be overridden in child classes. If you have a relatively small or simple customization to make, it may be easiest to install the packages normally, overriding any necessary methods and substituting in your own business logic.
-### **Forking the rpository**
-If you have a more in-depth or fundamental changes that you need to make, you can fork (or just download and modify) the repository and make whatever structural changes you need. In this case, you'll need to add the live site and admin class library projects from the repository to the appropriate solutions in visual studio, and then add a reference from the main project to the class library, rather than installing the nuget package.
+### **Forking the repository**
+If you have a more in-depth or fundamental changes that you need to make, you can fork (or just download and modify) the repository, and make whatever structural changes you need. In this case, you'll need to add the live site and admin class library projects from the repository to the appropriate solutions in visual studio. Do the following for each of the two projects:
+1. Right-click the solution and choose **Add > Existing Project**.
+1. Expand the main project of the solution (either the live site or admin WebApp) and you should either see a node for **Dependencies** or **References**, depending on the type of your project.
+1. Right click this node, and choose either **Add Reference...** or **Add Project Reference...**
+1. On the **Projects** tab of the resulting modal window, make sure that the checkbox next to the class library project is ticked.
+1. Click **Ok** to close the modal.
