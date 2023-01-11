@@ -19,7 +19,6 @@ namespace Custom.Xperience.Stripe
         /// <exception cref="StripeException">Throws exception if secret key is missing from web.config</exception>
         public static bool CapturePayment(string paymentIntentID)
         {
-            StripeConfiguration.ApiKey = Service.Resolve<IAppSettingsService>()["CustomStripeSecretKey"];
             if (string.IsNullOrEmpty(StripeConfiguration.ApiKey))
             {
                 throw new StripeException(ResHelper.GetString("custom.stripe.error.secretkeymissing"));

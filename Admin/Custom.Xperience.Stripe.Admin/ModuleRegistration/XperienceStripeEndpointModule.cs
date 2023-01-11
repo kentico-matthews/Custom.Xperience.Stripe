@@ -29,6 +29,8 @@ namespace Custom.Xperience.Stripe.Endpoint
                 defaults: new { controller = "Stripe", action = "Update" }
             );
 
+            StripeConfiguration.ApiKey = Service.Resolve<IAppSettingsService>()["CustomStripeSecretKey"];
+
             //Register event handler.
             OrderInfo.TYPEINFO.Events.Update.Before += Order_Update_Before;
         }
