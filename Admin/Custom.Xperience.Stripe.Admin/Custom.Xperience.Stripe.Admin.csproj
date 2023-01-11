@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Custom.Xperience.Stripe.Admin</RootNamespace>
-    <AssemblyName>Custom.Xperience.Stripe.Admin</AssemblyName>
+    <AssemblyName>kentico-matthews.Custom.Xperience.Stripe.Admin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -487,7 +487,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CaptureHelper\CaptureHelper.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="Controllers\StripeController.cs" />
     <Compile Include="ModuleRegistration\XperienceStripeEndpointModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

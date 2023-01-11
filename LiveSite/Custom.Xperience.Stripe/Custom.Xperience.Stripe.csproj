@@ -1,11 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Description>An open-source, community integration for using Stripe checkout in Kentco Xperience 13</Description>
+    <Description>An open-source, community integration for using Stripe checkout for E-commerce in Kentco Xperience 13</Description>
+    <PackageId>kentico-matthews.$(AssemblyName).LiveSite</PackageId>
+    <Version>1.0.1-alpha</Version>
+    <Authors>Matthew Sandstrom</Authors>
+    <Product>kentico-matthews.$(AssemblyName).LiveSite</Product>
+    <PackageProjectUrl>https://github.com/kentico-matthews/Custom.Xperience.Stripe</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>kentico;xperience;stripe;ecommerce</PackageTags>
+    <PackageReadmeFile>nuget-README.md</PackageReadmeFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="StripeOptions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\nuget-README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Kentico.Xperience.Libraries" Version="13.0.0" />
