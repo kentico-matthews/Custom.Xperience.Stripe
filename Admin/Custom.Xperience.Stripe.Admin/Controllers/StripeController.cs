@@ -42,7 +42,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                                 {
                                     order.OrderCustomData.SetValue("StripeCheckoutID", checkoutSession.Id);
 
-                                    if ((stripeEvent.Type == "checkout.session.completed" && checkoutSession.PaymentStatus == "paid") || stripeEvent.Type == "checkout.session.async_payment_succeeded")
+                                    if ((stripeEvent.Type == Events.CheckoutSessionCompleted && checkoutSession.PaymentStatus == "paid") || stripeEvent.Type == Events.CheckoutSessionAsyncPaymentSucceeded)
                                     {
                                         UpdateOrderStatusToPaid(order);
                                         order.OrderIsPaid = true;
@@ -53,7 +53,7 @@ namespace Custom.Xperience.Stripe.Endpoint
                                         order.OrderIsPaid = false;
                                         order.OrderCustomData.SetValue("StripePaymentIntentID", checkoutSession.PaymentIntentId);
                                     }
-                                    else if (stripeEvent.Type == "checkout.session.async_payment_failed" || stripeEvent.Type == "checkout.session.expired")
+                                    else if (stripeEvent.Type == Events.CheckoutSessionAsyncPaymentFailed || stripeEvent.Type == Events.CheckoutSessionExpired)
                                     {
                                         UpdateOrderStatusToFailed(order);
                                         order.OrderIsPaid = false;
@@ -73,12 +73,12 @@ namespace Custom.Xperience.Stripe.Endpoint
                             var order = GetOrderFromPaymentIntent(paymentIntent.Id);
                             if (order != null)
                             {
-                                if (stripeEvent.Type == "payment_intent.succeeded")
+                                if (stripeEvent.Type == Events.PaymentIntentSucceeded)
                                 {
                                     UpdateOrderStatusToPaid(order);
                                     order.OrderIsPaid = true;
                                 }
-                                else if (stripeEvent.Type == "payment_intent.payment_failed")
+                                else if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
                                 {
                                     UpdateOrderStatusToFailed(order);
                                     order.OrderIsPaid = false;
