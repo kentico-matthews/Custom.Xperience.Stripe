@@ -1,11 +1,11 @@
 # Xperience 13 Stripe Integration
 
 ## Summary
-This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store. (Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff. If you have problems, please create an issue in this repository rather than contacting Kentico support.)
+This community integration connects Kentico Xperience 13 with [Stripe](https://stripe.com/) for processing payments in your E-commerce store. (Please note that it is not an official integration, and has not been reviewed or tested by the Kentico development and QA staff. If you run into any problems, please create an issue in this repository rather than contacting Kentico support.)
 
 This repository uses [Stripe Checkout](https://stripe.com/payments/checkout), where the customer enters their payment data into a form hosted by Stripe, meaning your servers do not need to touch their card information.
 
-With this library, you'll be able to accept payments both through direct capture, and delayed capture of payment within the standard (typically 7-day) authorization window.
+This Xperience Stripe library allows you to accept payments both through direct capture, and delayed capture of payment within the standard (typically 7-day) authorization window.
 
 The Orders will be updated based on their payment status in Stripe, through an endpoint in the admin application.
 
@@ -28,18 +28,18 @@ If the **Order status for capture** setting under **Settings > Integration > Str
      * payment_intent.payment_failed
      * payment_intent.succeeded
 1. Click the **Add enpoint** button
-1. In the properties of your newly cretaed webhook, click *Reveal* under **Signing secret**.
-1. Add your this value to the **appSettings** section of your **web.config** file with the key *CustomStripeSecretKey*.
+1. In the properties of your newly created webhook, click *Reveal* under **Signing secret**.
+1. Add your this value to the **appSettings** section of your **web.config** file with the key *CustomStripeWebhookSecret*.
 1. In the Stripe dashboard, go to **Developers > API Keys** and reveal and copy the **Secret key**.
 1. Add your secret key from stripe under the **appSettings** section of your **web.config** file, and to your live site's **appconfig.json** (or other custom configuration) file with the key *CustomStripeSecretKey*.
 
 ### **Kentico Xperience Admin**
-1. Install the [ADMINPACKAGENAME] and [Stripe.net](https://www.nuget.org/packages/Stripe.net/) NuGet packages and build your solution
+1. Install the [kentico-matthews.Custom.Xperience.Stripe.Admin](https://www.nuget.org/packages/kentico-matthews.Custom.Xperience.Stripe.Admin/) NuGet package and build your solution
 1. Open the **Store configuration** or **Multistore Configuration** app in Xperience 13, whichever you're using for your shop.
 1. Go to the **Payment Methods** Tab.
 1. Click the button to create a **New payment method**.
 1. Set the **Display name** and **Code name** to *Stripe*.
-   * The display name can be different if you want, but some of the code relies on the code name being *Stripe*.
+   * The display name can be different if you want, these projects rely on the code name being *Stripe*.
 1. Designate order statuses for each of the following:
    * Order status if payment succeeds
    * Order status if payment is authorized
@@ -50,16 +50,16 @@ If the **Order status for capture** setting under **Settings > Integration > Str
 1. If you plan on using delayed capture for payments, go to **Settings > Integration > Stripe**, and set an order status that will trigger the capture of an order.
 
 ### **Live Site**
-1. Install the [LIVESITEPACKAGENAME] package and build your solution
-1. (Optional) Register XperienceStripeService as the implementation of IXperienceStripeService with your IoC container so that you can inject it
-1. During your checkout, check whether the payment method of the current shopping cart is set to the one you created for Stripe
-1. If so, once shoppingService.CreateOrder() is called, you can pass the resulting order object to the GetDirectOptions or GetDelayedOptions method of the XperienceStripeService, depending on whether you want to use direct or delayed capture
-1. You can then use these options to create a Stripe Checkout Session, as shown in the below example
+1. Install the [kentico-matthews.Custom.Xperience.Stripe.LiveSite](https://www.nuget.org/packages/kentico-matthews.Custom.Xperience.Stripe.LiveSite/) NuGet package and build your solution.
+1. (Optional) Register **XperienceStripeService** as the implementation of **IXperienceStripeService** with your IoC container so that you can inject it.
+1. During your checkout, make sure that the payment method of the current shopping cart is set to the one you created for Stripe.
+1. If so, once **shoppingService.CreateOrder()** is called, you can pass the resulting order object to the **GetDirectOptions** or **GetDelayedOptions** method of the **XperienceStripeService**, depending on whether you want to use direct or delayed capture.
+1. You can then use these options to create a Stripe Checkout Session, as shown in the below example.
 
 ---
 
 ## Examples
-The following example demonstrates the use of the stripe integration in a checkout controller on the live site. (It utilizes both direct capture and delayed capture, choosing which to use based on a boolean. This is not necessary, and whichever option you prefer can be used on its own.)
+The following example demonstrates the use of the Stripe integration in a checkout controller on the live site. (It utilizes both direct capture and delayed capture, with a bool variable to determine which. This is not necessary, and whichever option you prefer can be used on its own.)
 
 ```c#
 private readonly IShoppingService shoppingService;
@@ -121,7 +121,7 @@ public ActionResult Pay(PayViewModel model)
 
 The above example requires XperienceStripeService to be registered with your IoC container as an implementation of IXperienceStripeService.
 
-If you are not using Dependency Injection, you can simply instantiate an instance of XperienceStripeService.
+If you are not using Dependency Injection, instantiate an instance of XperienceStripeService.
 
 ```c#
 var xperienceStripeService = new XperienceStripeService();
@@ -129,7 +129,7 @@ var xperienceStripeService = new XperienceStripeService();
 var options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
 ```
 
-If you prefer to manually capture an order's payment, rather than using the setting to do so when the order reaches a certain status, you can use code like this somewhere in the admin solution, for example, in a custom scheduled task.
+If you prefer to manually capture an order's payment, rather than using the Order-Status-based setting, you can use code similar to the following example. (For instance, you could do this in a custom scheduled task.)
 
 ```c#
 //Get the order
@@ -160,13 +160,13 @@ else
 
 ---
 ## Development
-If this repository doesn't do exactly what you need, there are two main approaches to customize it.
+If this repository doesn't meet your requirements, there are two main approaches to customize it.
 ### **Extending the classes**
-Many of the classes in this repository contain virtual members which can be overridden in child classes. If you have a relatively small or simple customization to make, it may be easiest to install the packages normally, overriding any necessary methods and substituting in your own business logic.
+Many of the classes in this repository contain virtual members which can be overridden in child classes. If your requiremetns differ only sligtly form the existing implementation, it may be easiest to install the NuGet packages and override any necessary methods, substituting your own business logic.
 ### **Forking the repository**
-If you have a more in-depth or fundamental changes that you need to make, you can fork (or just download and modify) the repository, and make whatever structural changes you need. In this case, you'll need to add the live site and admin class library projects from the repository to the appropriate solutions in visual studio. Do the following for each of the two projects:
+If your use case requires more in-depth or fundamental changes, you can fork (or just download and modify) the repository, and make whatever structural changes you need. In this case, you'll need to add the live site and admin class library projects from the repository to the appropriate solutions in Visual Studio. Do the following for each of the two projects:
 1. Right-click the solution and choose **Add > Existing Project**.
-1. Expand the main project of the solution (either the live site or admin WebApp) and you should either see a node for **Dependencies** or **References**, depending on the type of your project.
+1. Expand the main project of the solution (either the live site or admin WebApp). Here, you should either see a node for **Dependencies** or **References**, depending on the type of your project.
 1. Right click this node, and choose either **Add Reference...** or **Add Project Reference...**
-1. On the **Projects** tab of the resulting modal window, make sure that the checkbox next to the class library project is ticked.
+1. On the **Projects** tab of the resulting modal window, make sure that the checkbox next to the class library project is selected.
 1. Click **Ok** to close the modal.
