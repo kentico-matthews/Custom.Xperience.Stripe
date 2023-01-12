@@ -118,7 +118,7 @@ public ActionResult Pay(PayViewModel model)
 		catch(Exception ex)
 		{
 			//...
-			return new StatusCodeResult(500);
+			return RedirectToAction("Error");
 		}
 	}
 }
