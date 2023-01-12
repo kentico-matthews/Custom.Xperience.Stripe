@@ -31,7 +31,8 @@ If the **Order status for capture** setting under **Settings > Integration > Str
 1. In the properties of your newly created webhook, click *Reveal* under **Signing secret**.
 1. Add your this value to the **appSettings** section of your **web.config** file with the key *CustomStripeWebhookSecret*.
 1. In the Stripe dashboard, go to **Developers > API Keys** and reveal and copy the **Secret key**.
-1. Add your secret key from stripe under the **appSettings** section of your **web.config** file, and to your live site's **appconfig.json** (or other custom configuration) file with the key *CustomStripeSecretKey*.
+1. Add your secret key from stripe under the **appSettings** section of your **web.config** file, and to your live site's configuration file with the key *CustomStripeSecretKey*.
+   * For the live site, the configuraiton file may refer to **web.config**, **appsettings.json**, or some other file, depending on the framework you're using and the setup you have performed.
 
 ### **Kentico Xperience Admin**
 1. Install the [kentico-matthews.Custom.Xperience.Stripe.Admin](https://www.nuget.org/packages/kentico-matthews.Custom.Xperience.Stripe.Admin/) NuGet package and build your solution
@@ -62,6 +63,8 @@ If the **Order status for capture** setting under **Settings > Integration > Str
 
 ## Examples
 The following example demonstrates the use of the Stripe integration in a checkout controller on the live site. (It utilizes both direct capture and delayed capture, with a bool variable to determine which. This is not necessary, and whichever option you prefer can be used on its own.)
+
+Make sure to add using directives for *Stripe.Checkout* and *Custom.Xperience.Stripe*
 
 ```c#
 private readonly IShoppingService shoppingService;
