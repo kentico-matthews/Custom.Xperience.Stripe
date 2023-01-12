@@ -96,14 +96,14 @@ namespace Custom.Xperience.Stripe.Endpoint
         private PaymentOptionInfo LoadOption(CacheSettings cs)
         {
             PaymentOptionInfo paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
-            cs.CacheDependency = CacheHelper.GetCacheDependency("ecommerce.paymentoption|byname|Stripe");
+            cs.CacheDependency = CacheHelper.GetCacheDependency("ecommerce.paymentoption|byname|stripe");
             return paymentOption;
         }
 
         private string LoadSetting(CacheSettings cs)
         {
             string setting = SettingsKeyInfoProvider.GetValue("OrderStatusForCapture");
-            cs.CacheDependency = CacheHelper.GetCacheDependency("cms.settingskey|byname|OrderStatusForCapture");
+            cs.CacheDependency = CacheHelper.GetCacheDependency("cms.settingskey|byname|orderstatusforcapture");
             return setting;
         }
     }

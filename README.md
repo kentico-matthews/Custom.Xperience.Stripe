@@ -51,7 +51,9 @@ If the **Order status for capture** setting under **Settings > Integration > Str
 
 ### **Live Site**
 1. Install the [kentico-matthews.Custom.Xperience.Stripe.LiveSite](https://www.nuget.org/packages/kentico-matthews.Custom.Xperience.Stripe.LiveSite/) NuGet package and build your solution.
-1. (Optional) Register **XperienceStripeService** as the implementation of **IXperienceStripeService** with your IoC container so that you can inject it.
+1. During startup, set the value of **StripeConfiguration.ApiKey** from the **CustomStripeSecretKey** value in your app settings. For example, if your IConfiguration instance is named *Configuration*, use code like this:
+   * ```StripeConfiguration.ApiKey = Configuration.GetValue<string>("CustomStripeSecretKey");```
+1. (Optional) During startup, register **XperienceStripeService** as the implementation of **IXperienceStripeService** with your IoC container so that you can inject it.
 1. During your checkout, make sure that the payment method of the current shopping cart is set to the one you created for Stripe.
 1. If so, once **shoppingService.CreateOrder()** is called, you can pass the resulting order object to the **GetDirectOptions** or **GetDelayedOptions** method of the **XperienceStripeService**, depending on whether you want to use direct or delayed capture.
 1. You can then use these options to create a Stripe Checkout Session, as shown in the below example.
