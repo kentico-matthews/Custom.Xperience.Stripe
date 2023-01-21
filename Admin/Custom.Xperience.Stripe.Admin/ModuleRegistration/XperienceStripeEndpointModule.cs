@@ -14,6 +14,7 @@ namespace Custom.Xperience.Stripe.Endpoint
 {
     public class XperienceStripeEndpointModule : Module
     {
+        private IEventLogService eventLogService;
         public XperienceStripeEndpointModule() : base("XperienceStripeEndpoint")
         {
         }
@@ -29,8 +30,10 @@ namespace Custom.Xperience.Stripe.Endpoint
                 defaults: new { controller = "Stripe", action = "Update" }
             );
 
+            CaptureHelper.Init();
             StripeConfiguration.ApiKey = Service.Resolve<IAppSettingsService>()["CustomStripeSecretKey"];
-
+            eventLogService = Service.Resolve<IEventLogService>();
+            
             //Register event handler.
             OrderInfo.TYPEINFO.Events.Update.Before += Order_Update_Before;
         }
@@ -70,22 +73,25 @@ namespace Custom.Xperience.Stripe.Endpoint
                                 try
                                 {
                                     //Capture the payment.
-                                    CaptureHelper.CapturePayment(paymentIntentID);
+                                    if(CaptureHelper.CapturePayment(paymentIntentID).AmountCapturable != 0)
+                                    {
+                                        //log a warning if the full amount was not captured
+                                        eventLogService.LogEvent(EventTypeEnum.Warning, "Stripe", ResHelper.GetString("custom.stripe.warning.partialamount"), $"OrderID: {order.OrderID} \r\nPaymentIntentID: {paymentIntentID}");
+                                    }
                                 }
                                 catch (StripeException ex)
                                 {
-                                    Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", "Stripe", ex.Message + "\r\n" + ex.StackTrace);
-                                    order.OrderStatusID = paymentOption.PaymentOptionFailedOrderStatusID;
+                                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", "Stripe", ex.Message + "\r\n" + ex.StackTrace);
                                 }
                             }
                             else
                             {
-                                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
+                                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
                             }
                         }
                         else
                         {
-                            Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentnotapproved"), $"OrderID: {order.OrderID}, StripePaymentIntentID: {paymentIntentID ?? "null"}");
+                            eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentnotapproved"), $"OrderID: {order.OrderID}, StripePaymentIntentID: {paymentIntentID ?? "null"}");
                         }
                     }
                 }
