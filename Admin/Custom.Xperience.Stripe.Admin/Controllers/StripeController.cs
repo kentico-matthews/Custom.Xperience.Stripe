@@ -11,160 +11,103 @@ using CMS.Ecommerce;
 using System.IO;
 using System.Web;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Custom.Xperience.Stripe.Endpoint
 {
     public class StripeController : ApiController
     {
+        private IEventLogService eventLogService;
+        private IAppSettingsService appSettingsService;
+        public StripeController()
+        {
+            this.eventLogService = Service.Resolve<IEventLogService>();
+            this.appSettingsService = Service.Resolve<IAppSettingsService>();
+        }
+
         [HttpPost]
         public virtual async Task<HttpResponseMessage> Update()
         {
             var json = await new StreamReader(HttpContext.Current.Request.InputStream, HttpContext.Current.Request.ContentEncoding).ReadToEndAsync();
-            var webhookSecret = Service.Resolve<IAppSettingsService>()["CustomStripeWebhookSecret"];
+            var webhookSecret = appSettingsService["CustomStripeWebhookSecret"];
             if (!String.IsNullOrEmpty(webhookSecret))
             {
-                try
+                if (Request.Headers.TryGetValues("Stripe-Signature", out var values))
                 {
-                    if (Request.Headers.TryGetValues("Stripe-Signature", out var values))
+                    var stripeEvent = GetStripeEvent(values, json, webhookSecret);
+
+                    if (stripeEvent != null && stripeEvent.Data.Object.Object == "checkout.session")
                     {
-                        var signatureHeader = values.First();
-                        
-                        //create event object, and check if webhook secret key matchees
-                        var stripeEvent = EventUtility.ConstructEvent(json, signatureHeader, webhookSecret);
-
-                        if (stripeEvent.Data.Object.Object == "checkout.session")
-                        {
-                            var checkoutSession = stripeEvent.Data.Object as Session;
-                            if (!String.IsNullOrEmpty(checkoutSession.ClientReferenceId))
-                            {
-                                var order = GetOrderFromCheckoutSession(checkoutSession.ClientReferenceId);
-                                if (order != null)
-                                {
-                                    order.OrderCustomData.SetValue("StripeCheckoutID", checkoutSession.Id);
-
-                                    if ((stripeEvent.Type == Events.CheckoutSessionCompleted && checkoutSession.PaymentStatus == "paid") || stripeEvent.Type == Events.CheckoutSessionAsyncPaymentSucceeded)
-                                    {
-                                        UpdateOrderStatusToPaid(order);
-                                        order.OrderIsPaid = true;
-                                    }
-                                    else if (stripeEvent.Type == "checkout.session.completed" && checkoutSession.PaymentStatus == "unpaid")
-                                    {
-                                        UpdateOrderStatusToAuthorized(order);
-                                        order.OrderIsPaid = false;
-                                        order.OrderCustomData.SetValue("StripePaymentIntentID", checkoutSession.PaymentIntentId);
-                                    }
-                                    else if (stripeEvent.Type == Events.CheckoutSessionAsyncPaymentFailed || stripeEvent.Type == Events.CheckoutSessionExpired)
-                                    {
-                                        UpdateOrderStatusToFailed(order);
-                                        order.OrderIsPaid = false;
-                                    }
-                                    else
-                                    {
-                                        Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
-                                    }
-                                    order.Update();
-                                }
-                            }
-                        }
-                        else if (stripeEvent.Data.Object.Object == "payment_intent")
-                        {
-                            var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
-
-                            var order = GetOrderFromPaymentIntent(paymentIntent.Id);
-                            if (order != null)
-                            {
-                                if (stripeEvent.Type == Events.PaymentIntentSucceeded)
-                                {
-                                    UpdateOrderStatusToPaid(order);
-                                    order.OrderIsPaid = true;
-                                }
-                                else if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
-                                {
-                                    UpdateOrderStatusToFailed(order);
-                                    order.OrderIsPaid = false;
-                                }
-                                else
-                                {
-                                    Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
-                                }
-                            }
-                            order.Update();
-                        }
-                        else
-                        {
-                            Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedobjecttype"), stripeEvent.Data.Object.Object);
-                        }
+                        UpdateOrderFromCheckoutSessioEvent(stripeEvent);
+                    }
+                    else if (stripeEvent != null && stripeEvent.Data.Object.Object == "payment_intent")
+                    {
+                        UpdateOrderFromPaymentIntent(stripeEvent);
                     }
                     else
                     {
-                        Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.signaturenotfound"));
+                        eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedobjecttype"), stripeEvent.Data.Object.Object);
                     }
                 }
-                catch(Exception ex)
+                else
                 {
-                    Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.webhookgeneric"),ex.Message + "\r\n" + ex.StackTrace);
+                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.signaturenotfound"));
                 }
             }
             else
             {
-                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.webhooksecretmissing"));
-
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.webhooksecretmissing"));
             }
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
 
-        protected virtual void UpdateOrderStatusToPaid(OrderInfo order)
+        protected virtual void UpdateOrderToPaid(OrderInfo order)
         {
+            order.OrderIsPaid = true;
+
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
-            if(paymentOption != null && paymentOption.PaymentOptionSucceededOrderStatusID > 0)
+            if(paymentOption != null && TryGetValidStatus(paymentOption.PaymentOptionSucceededOrderStatusID, out OrderStatusInfo status))
             {
-                var status = OrderStatusInfo.Provider.Get(paymentOption.PaymentOptionSucceededOrderStatusID);
-                if (status != null)
-                {
                     order.OrderStatusID = status.StatusID;
-                }
             }
             else
             {
-                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paidstatusnotset"));
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paidstatusnotset"));
             }
         }
 
 
-        protected virtual void UpdateOrderStatusToFailed(OrderInfo order)
+        protected virtual void UpdateOrderToFailed(OrderInfo order)
         {
+            order.OrderIsPaid = false;
+
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
-            if (paymentOption != null && paymentOption.PaymentOptionFailedOrderStatusID > 0)
+            if (paymentOption != null && TryGetValidStatus(paymentOption.PaymentOptionFailedOrderStatusID, out OrderStatusInfo status))
             {
-                var status = OrderStatusInfo.Provider.Get(paymentOption.PaymentOptionSucceededOrderStatusID);
-                if (status != null)
-                {
                     order.OrderStatusID = status.StatusID;
-                }
             }
             else
             {
-                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.failedstatusnotset"));
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.failedstatusnotset"));
             }
         }
 
 
-        protected virtual void UpdateOrderStatusToAuthorized(OrderInfo order)
+        protected virtual void UpdateOrderToAuthorized(OrderInfo order, string paymentIntentId)
         {
+            order.OrderIsPaid = false;
+            order.OrderCustomData.SetValue("StripePaymentIntentID", paymentIntentId);
+
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
-            if (paymentOption != null && paymentOption.PaymentOptionFailedOrderStatusID > 0)
+            if (paymentOption != null && TryGetValidStatus(paymentOption.PaymentOptionAuthorizedOrderStatusID, out OrderStatusInfo status))
             {
-                var status = OrderStatusInfo.Provider.Get(paymentOption.PaymentOptionAuthorizedOrderStatusID);
-                if (status != null)
-                {
                     order.OrderStatusID = status.StatusID;
-                }
             }
             else
             {
-                Service.Resolve<IEventLogService>().LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.authorizedstatusnotset"));
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.authorizedstatusnotset"));
             }
         }
 
@@ -180,6 +123,97 @@ namespace Custom.Xperience.Stripe.Endpoint
         {
             var orders = OrderInfo.Provider.Get().WhereEquals("OrderID", clientReferenceID);
             return orders.First();
+        }
+
+
+        protected virtual void UpdateOrderFromCheckoutSessioEvent(Event stripeEvent)
+        {
+            var checkoutSession = stripeEvent.Data.Object as Session;
+            if (!String.IsNullOrEmpty(checkoutSession.ClientReferenceId))
+            {
+                var order = GetOrderFromCheckoutSession(checkoutSession.ClientReferenceId);
+                if (order != null)
+                {
+                    UpdateOrderFromCheckoutSession(checkoutSession, order, stripeEvent);
+                }
+                else
+                {
+                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.orderNotFound"), $"OrderID: {order.OrderID} \r\nPaymentIntentId: {checkoutSession.PaymentIntentId}");
+                }
+            }
+        }
+
+
+        protected virtual void UpdateOrderFromCheckoutSession(Session checkoutSession, OrderInfo order, Event stripeEvent)
+        {
+            order.OrderCustomData.SetValue("StripeCheckoutID", checkoutSession.Id);
+
+            if ((stripeEvent.Type == Events.CheckoutSessionCompleted && checkoutSession.PaymentStatus == "paid") || stripeEvent.Type == Events.CheckoutSessionAsyncPaymentSucceeded)
+            {
+                UpdateOrderToPaid(order);
+            }
+            else if (stripeEvent.Type == "checkout.session.completed" && checkoutSession.PaymentStatus == "unpaid")
+            {
+                UpdateOrderToAuthorized(order, checkoutSession.PaymentIntentId);
+            }
+            else if (stripeEvent.Type == Events.CheckoutSessionAsyncPaymentFailed || stripeEvent.Type == Events.CheckoutSessionExpired)
+            {
+                UpdateOrderToFailed(order);
+            }
+            else
+            {
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
+            }
+            order.Update();
+        }
+
+
+        protected virtual void UpdateOrderFromPaymentIntent(Event stripeEvent)
+        {
+            var paymentIntent = stripeEvent.Data.Object as PaymentIntent;
+
+            var order = GetOrderFromPaymentIntent(paymentIntent.Id);
+            if (order != null)
+            {
+                if (stripeEvent.Type == Events.PaymentIntentSucceeded)
+                {
+                    UpdateOrderToPaid(order);
+                }
+                else if (stripeEvent.Type == Events.PaymentIntentPaymentFailed)
+                {
+                    UpdateOrderToFailed(order);
+                }
+                else
+                {
+                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
+                }
+            }
+            order.Update();
+        }
+
+
+        protected virtual Event GetStripeEvent(IEnumerable<string> headerValues, string json, string webhookSecret)
+        {
+            var signatureHeader = headerValues.First();
+
+            Event stripeEvent = null;
+            try
+            {
+                //this both creates the event object and checks if the secret key matches
+                stripeEvent = EventUtility.ConstructEvent(json, signatureHeader, webhookSecret);
+            }
+            catch (StripeException ex)
+            {
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.noevent"), ex.Message + "\r\n" + ex.StackTrace);
+            }
+            return stripeEvent;
+        }
+
+
+        bool TryGetValidStatus(int statusID, out OrderStatusInfo status)
+        {
+            status = OrderStatusInfo.Provider.Get(statusID);
+            return status != null;
         }
     }
 }
