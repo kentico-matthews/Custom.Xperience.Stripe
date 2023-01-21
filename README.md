@@ -90,36 +90,38 @@ public ActionResult Pay(PayViewModel model)
 	var paymentOption = PaymentOptionInfo.Provider.Get().WhereEquals("PaymentOptionName", "Stripe").First();
 	if (cart.ShoppingCartPaymentOptionID == paymentOption.PaymentOptionID)
 	{
-		try{
-			//Convert the ShoppingCartInfo object to an OrderInfo object.
-			var order = shoppingService.CreateOrder();
+		//Convert the ShoppingCartInfo object to an OrderInfo object.
+		var order = shoppingService.CreateOrder();
 
-			//Create stripe checkout options based on whether or not we want delayed capture.
-			SessionCreateOptions options;
-			if (useDelayedCapture)
-			{
-				//Creates options for an asynchronous checkout session, where payment is not captured immediately at checkout (delayed capture).
-				options = xperienceStripeService.getDelayedOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
-			}
-			else
-			{
-				//Creates options for a standard checkout session, where paymnet is captured when the cusotmer completes the checkout (direct capture).
-				options = xperienceStripeService.getDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
-			}
-			
-			//Create Stripe checkout session.
-			var service = new SessionService();
-			Session session = service.Create(options);
-
-			//Redirect to Stripe checkout.
-			Response.Headers.Add("Location", session.Url);
-			return new StatusCodeResult(303);
+		//Create stripe checkout options based on whether or not we want delayed capture.
+		SessionCreateOptions options;
+		if (useDelayedCapture)
+		{
+			//Creates options for an asynchronous checkout session, where payment is not captured immediately at checkout (delayed capture).
+			options = xperienceStripeService.GetDelayedOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
+		}
+		else
+		{
+			//Creates options for a standard checkout session, where paymnet is captured when the cusotmer completes the checkout (direct capture).
+			options = xperienceStripeService.GetDirectOptions(order, Url.Action(action: "ThankYou", controller: "Checkout"), Url.Action(action: "Login", controller: "Account"));
+		}
+		
+		//Create Stripe checkout session.
+		var service = new SessionService();
+		Session session;
+		try
+		{
+			session = service.Create(options);
 		}
 		catch(Exception ex)
 		{
 			//...
 			return RedirectToAction("Error");
 		}
+
+		//Redirect to Stripe checkout.
+		Response.Headers.Add("Location", session.Url);
+		return new StatusCodeResult(303);
 	}
 }
 ```
@@ -148,7 +150,11 @@ if(!String.IsNullOrEmpty(paymentIntentID))
 	try
 	{
 		//Capture the payment.
-		CaptureHelper.CapturePayment(paymentIntentID);
+		if(CaptureHelper.CapturePayment(paymentIntentID).AmountCapturable != 0)
+		{
+			//log a warning if the full amount was not captured
+			eventLogService.LogEvent(EventTypeEnum.Warning, "Stripe", "Full amount not captured", $"OrderID: {order.OrderID} \r\nPaymentIntentID: {paymentIntentID}");
+		}
 	}
 	catch(StripeException ex)
 	{
