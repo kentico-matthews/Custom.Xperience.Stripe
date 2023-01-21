@@ -1,10 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Stripe.Checkout;
 using CMS.Ecommerce;
 using CMS.Helpers;
-using System;
-using Stripe;
 
 namespace Custom.Xperience.Stripe
 {
@@ -17,7 +16,7 @@ namespace Custom.Xperience.Stripe
         /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
         /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
         /// <returns>Session options for creating a Stripe Checkout session.</returns>
-        public virtual SessionCreateOptions getDirectOptions(OrderInfo order, string successUrl, string cancelUrl)
+        public virtual SessionCreateOptions GetDirectOptions(OrderInfo order, string successUrl, string cancelUrl)
         {
             var lineItems = GetLineItems(order);
             
@@ -40,7 +39,7 @@ namespace Custom.Xperience.Stripe
         /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
         /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
         /// <returns>Session options for creating a Stripe Checkout session.</returns>
-        public virtual SessionCreateOptions getDelayedOptions(OrderInfo order, string successUrl, string cancelUrl)
+        public virtual SessionCreateOptions GetDelayedOptions(OrderInfo order, string successUrl, string cancelUrl)
         {
             var lineItems = GetLineItems(order);
 
