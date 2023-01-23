@@ -6,13 +6,14 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Description>An open-source, community integration for using Stripe checkout for E-commerce in Kentco Xperience 13</Description>
     <PackageId>kentico-matthews.$(AssemblyName).LiveSite</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Matthew Sandstrom</Authors>
     <Product>kentico-matthews.$(AssemblyName).LiveSite</Product>
     <PackageProjectUrl>https://github.com/kentico-matthews/Custom.Xperience.Stripe</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageTags>kentico;xperience;stripe;ecommerce</PackageTags>
     <PackageReadmeFile>nuget-README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Member names fixed to align with naming scheme, important changes to the admin package.</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

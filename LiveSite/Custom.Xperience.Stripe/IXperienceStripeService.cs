@@ -15,7 +15,7 @@ namespace Custom.Xperience.Stripe
         /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
         /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
         /// <returns>Session options for creating a Stripe Checkout session.</returns>
-        SessionCreateOptions getDirectOptions(OrderInfo order, string successUrl, string cancelUrl);
+        SessionCreateOptions GetDirectOptions(OrderInfo order, string successUrl, string cancelUrl);
 
 
         /// <summary>
@@ -25,6 +25,6 @@ namespace Custom.Xperience.Stripe
         /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
         /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
         /// <returns>Session options for creating a Stripe Checkout session.</returns>
-        SessionCreateOptions getDelayedOptions(OrderInfo order, string successUrl, string cancelUrl);
+        SessionCreateOptions GetDelayedOptions(OrderInfo order, string successUrl, string cancelUrl);
     }
 }
