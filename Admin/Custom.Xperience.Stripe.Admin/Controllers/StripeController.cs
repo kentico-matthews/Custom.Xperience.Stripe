@@ -1,22 +1,25 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Linq;
+using System.Net.Http;
 using System.Net;
 using System.Web.Http;
-using CMS.Core;
-using System;
-using Stripe;
-using CMS.Helpers;
-using System.Linq;
-using Stripe.Checkout;
-using CMS.Ecommerce;
 using System.IO;
 using System.Web;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Stripe;
+using Stripe.Checkout;
+using CMS.Helpers;
+using CMS.Core;
+using CMS.Ecommerce;
+
 
 namespace Custom.Xperience.Stripe.Endpoint
 {
     public class StripeController : ApiController
     {
+        protected const string PAYMENT_INTENT_ID_KEY = "StripePaymentIntentID";
+
         private IEventLogService eventLogService;
         private IAppSettingsService appSettingsService;
         public StripeController()
@@ -98,7 +101,7 @@ namespace Custom.Xperience.Stripe.Endpoint
         protected virtual void UpdateOrderToAuthorized(OrderInfo order, string paymentIntentId)
         {
             order.OrderIsPaid = false;
-            order.OrderCustomData.SetValue("StripePaymentIntentID", paymentIntentId);
+            order.OrderCustomData.SetValue(PAYMENT_INTENT_ID_KEY, paymentIntentId);
 
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
             if (paymentOption != null && TryGetValidStatus(paymentOption.PaymentOptionAuthorizedOrderStatusID, out OrderStatusInfo status))
@@ -114,7 +117,7 @@ namespace Custom.Xperience.Stripe.Endpoint
 
         protected virtual OrderInfo GetOrderFromPaymentIntent(string paymentIntentID)
         {
-            var orders = OrderInfo.Provider.Get().WhereLike("OrderCustomData", $"%{paymentIntentID}%");           
+            var orders = OrderInfo.Provider.Get().WhereLike("OrderCustomData", $"%<{PAYMENT_INTENT_ID_KEY}>{paymentIntentID}</{PAYMENT_INTENT_ID_KEY}>%");           
             return orders.First();
         }
 
@@ -138,8 +141,12 @@ namespace Custom.Xperience.Stripe.Endpoint
                 }
                 else
                 {
-                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.orderNotFound"), $"OrderID: {order.OrderID} \r\nPaymentIntentId: {checkoutSession.PaymentIntentId}");
+                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.orderNotFound"), $"OrderID: {checkoutSession.ClientReferenceId} \r\nPaymentIntentId: {checkoutSession.PaymentIntentId}");
                 }
+            }
+            else
+            {
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.clientreferenceidempty"), $"Session.Id: {checkoutSession.Id} \r\nPaymentIntentId: {checkoutSession.PaymentIntentId}");
             }
         }
 
@@ -152,7 +159,7 @@ namespace Custom.Xperience.Stripe.Endpoint
             {
                 UpdateOrderToPaid(order);
             }
-            else if (stripeEvent.Type == "checkout.session.completed" && checkoutSession.PaymentStatus == "unpaid")
+            else if (stripeEvent.Type == Events.CheckoutSessionCompleted && checkoutSession.PaymentStatus == "unpaid")
             {
                 UpdateOrderToAuthorized(order, checkoutSession.PaymentIntentId);
             }
@@ -187,8 +194,9 @@ namespace Custom.Xperience.Stripe.Endpoint
                 {
                     eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.unsupportedeventtype"), stripeEvent.Type);
                 }
+                order.Update();
             }
-            order.Update();
+            
         }
 
 
