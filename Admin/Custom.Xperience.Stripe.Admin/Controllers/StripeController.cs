@@ -18,7 +18,6 @@ namespace Custom.Xperience.Stripe.Endpoint
 {
     public class StripeController : ApiController
     {
-        protected const string PAYMENT_INTENT_ID_KEY = "StripePaymentIntentID";
 
         private IEventLogService eventLogService;
         private IAppSettingsService appSettingsService;
@@ -101,7 +100,7 @@ namespace Custom.Xperience.Stripe.Endpoint
         protected virtual void UpdateOrderToAuthorized(OrderInfo order, string paymentIntentId)
         {
             order.OrderIsPaid = false;
-            order.OrderCustomData.SetValue(PAYMENT_INTENT_ID_KEY, paymentIntentId);
+            order.OrderCustomData.SetValue(XperienceStripeConstants.PAYMENT_INTENT_ID_KEY, paymentIntentId);
 
             var paymentOption = PaymentOptionInfo.Provider.Get(order.OrderPaymentOptionID);
             if (paymentOption != null && TryGetValidStatus(paymentOption.PaymentOptionAuthorizedOrderStatusID, out OrderStatusInfo status))
@@ -117,7 +116,7 @@ namespace Custom.Xperience.Stripe.Endpoint
 
         protected virtual OrderInfo GetOrderFromPaymentIntent(string paymentIntentID)
         {
-            var orders = OrderInfo.Provider.Get().WhereLike("OrderCustomData", $"%<{PAYMENT_INTENT_ID_KEY}>{paymentIntentID}</{PAYMENT_INTENT_ID_KEY}>%");           
+            var orders = OrderInfo.Provider.Get().WhereLike("OrderCustomData", $"%<{XperienceStripeConstants.PAYMENT_INTENT_ID_KEY}>{paymentIntentID}</{XperienceStripeConstants.PAYMENT_INTENT_ID_KEY}>%");           
             return orders.First();
         }
 
@@ -153,7 +152,7 @@ namespace Custom.Xperience.Stripe.Endpoint
 
         protected virtual void UpdateOrderFromCheckoutSession(Session checkoutSession, OrderInfo order, Event stripeEvent)
         {
-            order.OrderCustomData.SetValue("StripeCheckoutID", checkoutSession.Id);
+            order.OrderCustomData.SetValue(XperienceStripeConstants.CHECKOUT_ID_KEY, checkoutSession.Id);
 
             if ((stripeEvent.Type == Events.CheckoutSessionCompleted && checkoutSession.PaymentStatus == "paid") || stripeEvent.Type == Events.CheckoutSessionAsyncPaymentSucceeded)
             {

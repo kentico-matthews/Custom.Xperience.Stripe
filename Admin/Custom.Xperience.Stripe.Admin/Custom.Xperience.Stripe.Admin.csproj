@@ -486,6 +486,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\XperienceStripeConstants.cs" />
     <Compile Include="Helpers\CaptureHelper.cs" />
     <Compile Include="Controllers\StripeController.cs" />
     <Compile Include="ModuleRegistration\XperienceStripeEndpointModule.cs" />
