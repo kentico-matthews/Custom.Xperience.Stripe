@@ -32,447 +32,447 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.14.0.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
+      <HintPath>packages\AngleSharp.0.14.0\lib\net472\AngleSharp.dll</HintPath>
     </Reference>
     <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\AWSSDK.Core.3.5.1.13\lib\net45\AWSSDK.Core.dll</HintPath>
+      <HintPath>packages\AWSSDK.Core.3.5.1.60\lib\net45\AWSSDK.Core.dll</HintPath>
     </Reference>
     <Reference Include="AWSSDK.S3, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\AWSSDK.S3.3.5.1.4\lib\net45\AWSSDK.S3.dll</HintPath>
+      <HintPath>packages\AWSSDK.S3.3.5.1.11\lib\net45\AWSSDK.S3.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Activities, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Activities.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Activities.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Activities.Loggers, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Activities.Loggers.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Activities.Loggers.dll</HintPath>
     </Reference>
     <Reference Include="CMS.AmazonStorage, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.AmazonStorage.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.AmazonStorage.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Automation, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Automation.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Automation.dll</HintPath>
     </Reference>
     <Reference Include="CMS.AzureStorage, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.AzureStorage.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.AzureStorage.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Base, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Base.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Base.dll</HintPath>
     </Reference>
     <Reference Include="CMS.ContactManagement, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ContactManagement.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ContactManagement.dll</HintPath>
     </Reference>
     <Reference Include="CMS.ContinuousIntegration, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ContinuousIntegration.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ContinuousIntegration.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Core, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Core.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Core.dll</HintPath>
     </Reference>
     <Reference Include="CMS.CustomTables, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.CustomTables.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.CustomTables.dll</HintPath>
     </Reference>
     <Reference Include="CMS.DataEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.DataEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.DataEngine.dll</HintPath>
     </Reference>
     <Reference Include="CMS.DataProtection, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.DataProtection.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.DataProtection.dll</HintPath>
     </Reference>
     <Reference Include="CMS.DocumentEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.DocumentEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.DocumentEngine.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Ecommerce, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Ecommerce.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Ecommerce.dll</HintPath>
     </Reference>
     <Reference Include="CMS.EmailEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.EmailEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.EmailEngine.dll</HintPath>
     </Reference>
     <Reference Include="CMS.EventLog, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.EventLog.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.EventLog.dll</HintPath>
     </Reference>
     <Reference Include="CMS.FormEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.FormEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.FormEngine.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Globalization, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Globalization.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Globalization.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Helpers, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Helpers.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="CMS.ImportExport, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ImportExport.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ImportExport.dll</HintPath>
     </Reference>
     <Reference Include="CMS.IO, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.IO.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.IO.dll</HintPath>
     </Reference>
     <Reference Include="CMS.LicenseProvider, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.LicenseProvider.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.LicenseProvider.dll</HintPath>
     </Reference>
     <Reference Include="CMS.MacroEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.MacroEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.MacroEngine.dll</HintPath>
     </Reference>
     <Reference Include="CMS.MediaLibrary, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.MediaLibrary.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.MediaLibrary.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Membership, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Membership.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Membership.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Modules, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Modules.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Modules.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Newsletters, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Newsletters.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Newsletters.dll</HintPath>
     </Reference>
     <Reference Include="CMS.OnlineForms, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.OnlineForms.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.OnlineForms.dll</HintPath>
     </Reference>
     <Reference Include="CMS.OnlineMarketing, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.OnlineMarketing.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.OnlineMarketing.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Personas, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Personas.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Personas.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Relationships, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Relationships.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Relationships.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Reporting, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Reporting.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Reporting.dll</HintPath>
     </Reference>
     <Reference Include="CMS.ResponsiveImages, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ResponsiveImages.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.ResponsiveImages.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Routing.Web, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Routing.Web.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Routing.Web.dll</HintPath>
     </Reference>
     <Reference Include="CMS.SalesForce, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.SalesForce.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.SalesForce.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Scheduler, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Scheduler.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Scheduler.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Search, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Search.Azure, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.Azure.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.Azure.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Search.Lucene3, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.Lucene3.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.Lucene3.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Search.TextExtractors, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.TextExtractors.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Search.TextExtractors.dll</HintPath>
     </Reference>
     <Reference Include="CMS.SiteProvider, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.SiteProvider.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.SiteProvider.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Synchronization, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Synchronization.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Synchronization.dll</HintPath>
     </Reference>
     <Reference Include="CMS.SynchronizationEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.SynchronizationEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.SynchronizationEngine.dll</HintPath>
     </Reference>
     <Reference Include="CMS.Taxonomy, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Taxonomy.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.Taxonomy.dll</HintPath>
     </Reference>
     <Reference Include="CMS.TranslationServices, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.TranslationServices.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.TranslationServices.dll</HintPath>
     </Reference>
     <Reference Include="CMS.WebAnalytics, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.WebAnalytics.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.WebAnalytics.dll</HintPath>
     </Reference>
     <Reference Include="CMS.WebFarmSync, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.WebFarmSync.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.WebFarmSync.dll</HintPath>
     </Reference>
     <Reference Include="CMS.WorkflowEngine, Version=13.0.0.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.WorkflowEngine.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\CMS.WorkflowEngine.dll</HintPath>
     </Reference>
     <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+      <HintPath>packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.v3, Version=3.0.3.0, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\Lucene.Net.v3.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\Lucene.Net.v3.dll</HintPath>
     </Reference>
     <Reference Include="Lucene.Net.WordNet.SynExpand, Version=2.0.0.1, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\Lucene.Net.WordNet.SynExpand.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\Lucene.Net.WordNet.SynExpand.dll</HintPath>
     </Reference>
     <Reference Include="MaxMind.Db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\MaxMind.Db.2.6.1\lib\net45\MaxMind.Db.dll</HintPath>
+      <HintPath>packages\MaxMind.Db.2.6.1\lib\net45\MaxMind.Db.dll</HintPath>
     </Reference>
     <Reference Include="MaxMind.GeoIP2, Version=3.0.0.0, Culture=neutral, PublicKeyToken=66afa4cc5ae853ac, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\MaxMind.GeoIP2.3.2.0\lib\net45\MaxMind.GeoIP2.dll</HintPath>
+      <HintPath>packages\MaxMind.GeoIP2.3.2.0\lib\net45\MaxMind.GeoIP2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.KeyVault.Core.1.0.0\lib\net40\Microsoft.Azure.KeyVault.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Search, Version=10.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Search.10.1.0\lib\net461\Microsoft.Azure.Search.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Search.10.1.0\lib\net461\Microsoft.Azure.Search.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Search.Common, Version=10.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Search.Common.10.1.0\lib\net461\Microsoft.Azure.Search.Common.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Search.Common.10.1.0\lib\net461\Microsoft.Azure.Search.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Search.Data, Version=10.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Search.Data.10.1.0\lib\net461\Microsoft.Azure.Search.Data.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Search.Data.10.1.0\lib\net461\Microsoft.Azure.Search.Data.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Search.Service, Version=10.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Search.Service.10.1.0\lib\net461\Microsoft.Azure.Search.Service.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Search.Service.10.1.0\lib\net461\Microsoft.Azure.Search.Service.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Storage.Blob, Version=11.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Storage.Blob.11.2.2\lib\net452\Microsoft.Azure.Storage.Blob.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Storage.Blob.11.2.2\lib\net452\Microsoft.Azure.Storage.Blob.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Storage.Common, Version=11.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Storage.Common.11.2.2\lib\net452\Microsoft.Azure.Storage.Common.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Storage.Common.11.2.2\lib\net452\Microsoft.Azure.Storage.Common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Azure.Storage.Queue, Version=11.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Azure.Storage.Queue.11.2.2\lib\net452\Microsoft.Azure.Storage.Queue.dll</HintPath>
+      <HintPath>packages\Microsoft.Azure.Storage.Queue.11.2.2\lib\net452\Microsoft.Azure.Storage.Queue.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.1.1.1\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Tools.Schema.Sql, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
+      <HintPath>packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.Data.Tools.Schema.Sql.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Tools.Utilities, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
+      <HintPath>packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.Data.Tools.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Caching.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Caching.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Caching.Memory, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Caching.Memory.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Caching.Memory.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Configuration.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Configuration.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Configuration.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Configuration.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Configuration.Binder.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Configuration.Binder.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.DependencyInjection.3.1.8\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.3.1.8\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.DependencyInjection.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.FileProviders.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.FileProviders.Physical.3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.FileProviders.Physical.3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.FileSystemGlobbing.3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.FileSystemGlobbing.3.1.8\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Logging.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Logging.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Logging.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Logging.Debug, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Logging.Debug.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Logging.Debug.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Logging.Debug.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Logging.Debug.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Options, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Options.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Options.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Options.ConfigurationExtensions, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Options.ConfigurationExtensions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Options.ConfigurationExtensions.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.8.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Extensions.Primitives.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+      <HintPath>packages\Microsoft.Extensions.Primitives.3.1.8\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.IdentityModel.JsonWebTokens.6.7.1\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.6.7.1\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Logging, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.IdentityModel.Logging.6.7.1\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <HintPath>packages\Microsoft.IdentityModel.Logging.6.7.1\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.IdentityModel.Tokens.6.7.1\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.6.7.1\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Rest.ClientRuntime.2.3.20\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
+      <HintPath>packages\Microsoft.Rest.ClientRuntime.2.3.20\lib\net461\Microsoft.Rest.ClientRuntime.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Rest.ClientRuntime.Azure, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Rest.ClientRuntime.Azure.3.3.18\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
+      <HintPath>packages\Microsoft.Rest.ClientRuntime.Azure.3.3.18\lib\net452\Microsoft.Rest.ClientRuntime.Azure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Spatial, Version=7.5.3.21218, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.Spatial.7.5.3\lib\portable-net45+win8+wpa81\Microsoft.Spatial.dll</HintPath>
+      <HintPath>packages\Microsoft.Spatial.7.5.3\lib\portable-net45+win8+wpa81\Microsoft.Spatial.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Dac, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
+      <HintPath>packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.Dac.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Dac.Extensions, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
+      <HintPath>packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.Dac.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.TransactSql.ScriptDom, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
+      <HintPath>packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.TransactSql.ScriptDom.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
+      <HintPath>packages\Microsoft.SqlServer.DacFx.150.4573.2\lib\net46\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.10.0.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.dll</HintPath>
+      <HintPath>packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb, Version=0.10.0.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb, Version=0.10.0.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Rocks, Version=0.10.0.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
+      <HintPath>packages\Mono.Cecil.0.10.0\lib\net40\Mono.Cecil.Rocks.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Common, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\NuGet.Common.5.3.1\lib\net472\NuGet.Common.dll</HintPath>
+      <HintPath>packages\NuGet.Common.5.3.1\lib\net472\NuGet.Common.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Configuration, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\NuGet.Configuration.5.3.1\lib\net472\NuGet.Configuration.dll</HintPath>
+      <HintPath>packages\NuGet.Configuration.5.3.1\lib\net472\NuGet.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Frameworks, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\NuGet.Frameworks.5.3.1\lib\net472\NuGet.Frameworks.dll</HintPath>
+      <HintPath>packages\NuGet.Frameworks.5.3.1\lib\net472\NuGet.Frameworks.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Packaging, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\NuGet.Packaging.5.3.1\lib\net472\NuGet.Packaging.dll</HintPath>
+      <HintPath>packages\NuGet.Packaging.5.3.1\lib\net472\NuGet.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="NuGet.Versioning, Version=5.3.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\NuGet.Versioning.5.3.1\lib\net472\NuGet.Versioning.dll</HintPath>
+      <HintPath>packages\NuGet.Versioning.5.3.1\lib\net472\NuGet.Versioning.dll</HintPath>
     </Reference>
     <Reference Include="PDFClown, Version=0.1.2.1, Culture=neutral, PublicKeyToken=834b12a258f213f9, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\PDFClown.dll</HintPath>
+      <HintPath>packages\Kentico.Xperience.Libraries.13.0.0\lib\netstandard2.0\PDFClown.dll</HintPath>
     </Reference>
     <Reference Include="PreMailer.Net, Version=2.2.0.0, Culture=neutral, PublicKeyToken=23e3f43e29cae17f, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\PreMailer.Net.2.2.0\lib\net461\PreMailer.Net.dll</HintPath>
+      <HintPath>packages\PreMailer.Net.2.2.0\lib\net461\PreMailer.Net.dll</HintPath>
     </Reference>
     <Reference Include="Stripe.net, Version=41.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Stripe.net.41.2.0\lib\net461\Stripe.net.dll</HintPath>
+      <HintPath>packages\Stripe.net.41.2.0\lib\net461\Stripe.net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.CodeDom, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
+      <HintPath>packages\System.CodeDom.4.5.0\lib\net461\System.CodeDom.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+      <HintPath>packages\System.ComponentModel.Annotations.4.7.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+      <HintPath>packages\System.Configuration.ConfigurationManager.4.5.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Data.HashFunction.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=80c9288e394c1322, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Data.HashFunction.Core.2.0.0\lib\net45\System.Data.HashFunction.Core.dll</HintPath>
+      <HintPath>packages\System.Data.HashFunction.Core.2.0.0\lib\net45\System.Data.HashFunction.Core.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.HashFunction.CRC, Version=2.0.0.0, Culture=neutral, PublicKeyToken=80c9288e394c1322, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Data.HashFunction.CRC.2.0.0\lib\net45\System.Data.HashFunction.CRC.dll</HintPath>
+      <HintPath>packages\System.Data.HashFunction.CRC.2.0.0\lib\net45\System.Data.HashFunction.CRC.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.HashFunction.Interfaces, Version=2.0.0.0, Culture=neutral, PublicKeyToken=80c9288e394c1322, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Data.HashFunction.Interfaces.2.0.0\lib\net45\System.Data.HashFunction.Interfaces.dll</HintPath>
+      <HintPath>packages\System.Data.HashFunction.Interfaces.2.0.0\lib\net45\System.Data.HashFunction.Interfaces.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.OracleClient" />
     <Reference Include="System.Data.SqlClient, Version=4.5.0.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Data.SqlClient.4.6.1\lib\net461\System.Data.SqlClient.dll</HintPath>
+      <HintPath>packages\System.Data.SqlClient.4.6.1\lib\net461\System.Data.SqlClient.dll</HintPath>
     </Reference>
     <Reference Include="System.Diagnostics.EventLog, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Diagnostics.EventLog.4.6.0\lib\net461\System.Diagnostics.EventLog.dll</HintPath>
+      <HintPath>packages\System.Diagnostics.EventLog.4.6.0\lib\net461\System.Diagnostics.EventLog.dll</HintPath>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
+      <HintPath>packages\System.Drawing.Common.4.5.1\lib\net461\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.7.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.IdentityModel.Tokens.Jwt.6.7.1\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.6.7.1\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.FileSystem.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.IO.FileSystem.AccessControl.4.5.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
+      <HintPath>packages\System.IO.FileSystem.AccessControl.4.5.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <HintPath>packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+      <HintPath>packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <HintPath>packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+      <HintPath>packages\System.Security.AccessControl.4.5.0\lib\net461\System.Security.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Permissions, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
+      <HintPath>packages\System.Security.Permissions.4.5.0\lib\net461\System.Security.Permissions.dll</HintPath>
     </Reference>
     <Reference Include="System.Security.Principal.Windows, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Security.Principal.Windows.4.6.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+      <HintPath>packages\System.Security.Principal.Windows.4.6.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Duplex, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ServiceModel.Duplex.4.6.0\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
+      <HintPath>packages\System.ServiceModel.Duplex.4.6.0\lib\net461\System.ServiceModel.Duplex.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel.Http, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ServiceModel.Http.4.6.0\lib\net461\System.ServiceModel.Http.dll</HintPath>
+      <HintPath>packages\System.ServiceModel.Http.4.6.0\lib\net461\System.ServiceModel.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel.NetTcp, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ServiceModel.NetTcp.4.6.0\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
+      <HintPath>packages\System.ServiceModel.NetTcp.4.6.0\lib\net461\System.ServiceModel.NetTcp.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel.Primitives, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ServiceModel.Primitives.4.6.0\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
+      <HintPath>packages\System.ServiceModel.Primitives.4.6.0\lib\net461\System.ServiceModel.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel.Security, Version=4.6.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ServiceModel.Security.4.6.0\lib\net461\System.ServiceModel.Security.dll</HintPath>
+      <HintPath>packages\System.ServiceModel.Security.4.6.0\lib\net461\System.ServiceModel.Security.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceModel.Syndication, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ServiceModel.Syndication.4.5.0\lib\net461\System.ServiceModel.Syndication.dll</HintPath>
+      <HintPath>packages\System.ServiceModel.Syndication.4.5.0\lib\net461\System.ServiceModel.Syndication.dll</HintPath>
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Text.Encoding.CodePages, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+      <HintPath>packages\System.Text.Encoding.CodePages.4.5.0\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.AccessControl, Version=4.0.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Threading.AccessControl.4.5.0\lib\net461\System.Threading.AccessControl.dll</HintPath>
+      <HintPath>packages\System.Threading.AccessControl.4.5.0\lib\net461\System.Threading.AccessControl.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.9\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -481,7 +481,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="Ude.NetStandard, Version=1.0.2.0, Culture=neutral, PublicKeyToken=103cb45fc06c90e4, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\Ude.NetStandard.1.2.0\lib\net45\Ude.NetStandard.dll</HintPath>
+      <HintPath>packages\Ude.NetStandard.1.2.0\lib\net45\Ude.NetStandard.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -499,8 +499,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\..\..\..\..\..\..\inetpub\wwwroot\STRIPE\packages\AWSSDK.S3.3.5.1.4\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
+    <Analyzer Include="packages\AWSSDK.S3.3.5.1.11\analyzers\dotnet\cs\AWSSDK.S3.CodeAnalysis.dll" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
