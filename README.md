@@ -22,8 +22,6 @@ If the **Order status for capture** setting under **Settings > Integration > Str
    * Checkout
      * checkout.session.completed
      * checkout.session.expired
-     * checkout.session.async_payment_failed
-     * checkout.session.async_payment_succeeded
    * Payment
      * payment_intent.payment_failed
      * payment_intent.succeeded

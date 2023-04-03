@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>1.0.4</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+	<licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+	<readme>nuget-README.md</readme>
+    <projectUrl>https://github.com/kentico-matthews/Custom.Xperience.Stripe</projectUrl>
+    <description>$description$</description>
+    <releaseNotes>Improvements to dependency resolution and logging</releaseNotes>
+    <copyright>$copyright$</copyright>
+    <tags>kentico xperience stripe ecommerce</tags>
+  </metadata>
+  <files>
+	<file src="..\..\nuget-README.md" target="" />
+   </files>
+</package>
