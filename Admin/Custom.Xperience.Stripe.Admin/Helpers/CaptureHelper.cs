@@ -1,8 +1,6 @@
 ﻿using Stripe;
 using CMS.Core;
-using CMS.Helpers;
 using CMS.Ecommerce;
-using System;
 
 namespace Custom.Xperience.Stripe
 {
@@ -10,11 +8,13 @@ namespace Custom.Xperience.Stripe
     {
         private static IResolvablePaymentIntentService paymentIntentService;
         private static IEventLogService eventLogService;
+        private static ILocalizationService localizationService;
 
         public static void Init()
         {
             paymentIntentService = Service.Resolve<IResolvablePaymentIntentService>();
             eventLogService = Service.Resolve<IEventLogService>();
+            localizationService = Service.Resolve<ILocalizationService>();
         }
 
         /// <summary>
@@ -27,7 +27,11 @@ namespace Custom.Xperience.Stripe
         {
             if (string.IsNullOrEmpty(StripeConfiguration.ApiKey))
             {
-                throw new StripeException(ResHelper.GetString("custom.stripe.error.secretkeymissing"));
+                throw new StripeException(localizationService.GetString("custom.stripe.error.secretkeymissing"));
+            }
+            if (string.IsNullOrEmpty(paymentIntentID))
+            {
+                throw new StripeException(localizationService.GetString("custom.stripe.error.paymentintentmissing"));
             }
             return paymentIntentService.Capture(paymentIntentID);
 
@@ -40,28 +44,35 @@ namespace Custom.Xperience.Stripe
         /// <param name="order">The order to capture payment for</param>
         public static void CaptureOrder(OrderInfo order)
         {
-            //Get the payment intent from the order's custom data.
-            var paymentIntentID = (string)order.OrderCustomData.GetValue(XperienceStripeConstants.PAYMENT_INTENT_ID_KEY);
-
-            if (!String.IsNullOrEmpty(paymentIntentID))
+            if (order != null)
             {
-                try
+                //Get the payment intent from the order's custom data.
+                var paymentIntentID = (string)order.OrderCustomData.GetValue(XperienceStripeConstants.PAYMENT_INTENT_ID_KEY);
+
+                if (!string.IsNullOrEmpty(paymentIntentID))
                 {
-                    //Capture the payment.
-                    if (CapturePayment(paymentIntentID).AmountCapturable != 0)
+                    try
                     {
-                        //log a warning if the full amount was not captured
-                        eventLogService.LogEvent(EventTypeEnum.Warning, "Stripe", ResHelper.GetString("custom.stripe.warning.partialamount"), $"OrderID: {order.OrderID} \r\nPaymentIntentID: {paymentIntentID}");
+                        //Capture the payment.
+                        if (CapturePayment(paymentIntentID).AmountCapturable != 0)
+                        {
+                            //log a warning if the full amount was not captured
+                            eventLogService.LogEvent(EventTypeEnum.Warning, "Stripe", localizationService.GetString("custom.stripe.warning.partialamount"), $"OrderID: {order.OrderID} \r\nPaymentIntentID: {paymentIntentID}");
+                        }
+                    }
+                    catch (StripeException ex)
+                    {
+                        eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", "Stripe", ex.Message + "\r\n" + ex.StackTrace);
                     }
                 }
-                catch (StripeException ex)
+                else
                 {
-                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", "Stripe", ex.Message + "\r\n" + ex.StackTrace);
+                    eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", localizationService.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
                 }
             }
             else
             {
-                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", ResHelper.GetString("custom.stripe.error.paymentintentmissing"), $"OrderID {order.OrderID}");
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", localizationService.GetString("custom.stripe.error.ordernotfound"), $"OrderID {order.OrderID}");
             }
         }
     }
