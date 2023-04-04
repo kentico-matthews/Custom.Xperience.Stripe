@@ -1,14 +1,35 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Stripe.Checkout;
+﻿using CMS.Core;
 using CMS.Ecommerce;
-using CMS.Helpers;
+using Stripe.Checkout;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Custom.Xperience.Stripe
 {
     public class XperienceStripeService : IXperienceStripeService
     {
+        private readonly IOrderItemInfoProvider orderItemInfoProvider;
+        private readonly ICurrencyInfoProvider currencyInfoProvider;
+        private readonly ILocalizationService localizationService;
+        private readonly IEventLogService eventLogService;
+
+
+        /// <summary>
+        /// Creates a new instance of <see cref="XperienceStripeService"/>.
+        /// </summary>
+        /// <param name="orderItemInfoProvider">An IOrderItemInfoProvider, provided by dependency injection.</param>
+        /// <param name="currencyInfoProvider">An ICurrencyInfoProvider, provided by dependency injection.</param>
+        /// <param name="localizationService">An ILocalizationService, provided by dependency injection.</param>
+        public XperienceStripeService(IOrderItemInfoProvider orderItemInfoProvider, ICurrencyInfoProvider currencyInfoProvider, ILocalizationService localizationService, IEventLogService eventLogService)
+        {
+            this.orderItemInfoProvider = orderItemInfoProvider;
+            this.currencyInfoProvider = currencyInfoProvider;
+            this.localizationService = localizationService;
+            this.eventLogService = eventLogService;
+        }
+
+
         /// <summary>
         /// Prepares session options for a Stripe checkout session
         /// </summary>
@@ -16,19 +37,29 @@ namespace Custom.Xperience.Stripe
         /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
         /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
         /// <returns>Session options for creating a Stripe Checkout session.</returns>
-        public virtual SessionCreateOptions GetDirectOptions(OrderInfo order, string successUrl, string cancelUrl)
+        public virtual SessionCreateOptions? GetDirectOptions(OrderInfo order, string successUrl, string cancelUrl)
         {
-            var lineItems = GetLineItems(order);
-            
-            var options = new SessionCreateOptions
+            if (order == null)
             {
-                LineItems = lineItems,
-                Mode = "payment",
-                SuccessUrl = successUrl,
-                CancelUrl = cancelUrl,
-                ClientReferenceId = order.OrderID.ToString()
-            };
-            return options;
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", localizationService.GetString("custom.stripe.error.ordernotfound"));
+                return null;
+            }
+            var lineItems = GetLineItems(order);
+            if (lineItems.Count > 0 && !string.IsNullOrEmpty(successUrl) && !string.IsNullOrEmpty(cancelUrl))
+            {
+                var options = new SessionCreateOptions
+                {
+                    LineItems = lineItems,
+                    Mode = "payment",
+                    SuccessUrl = successUrl,
+                    CancelUrl = cancelUrl,
+                    ClientReferenceId = order.OrderID.ToString()
+                };
+                return options;
+            }
+            eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", localizationService.GetString("custom.stripe.error.failedsessioncreateoptions"), $"Line Items count: {lineItems.Count},\r\nSuccess url: {successUrl},\r\nCancel url: {cancelUrl} ");
+            return null;
+            
         }
 
 
@@ -39,23 +70,33 @@ namespace Custom.Xperience.Stripe
         /// <param name="successUrl">The Url that the cusotmer will be directed to after successful payment</param>
         /// <param name="cancelUrl">The Url that the cusotmer will be directed to after failed payment</param>
         /// <returns>Session options for creating a Stripe Checkout session.</returns>
-        public virtual SessionCreateOptions GetDelayedOptions(OrderInfo order, string successUrl, string cancelUrl)
+        public virtual SessionCreateOptions? GetDelayedOptions(OrderInfo order, string successUrl, string cancelUrl)
         {
-            var lineItems = GetLineItems(order);
-
-            var options = new SessionCreateOptions
+            if (order == null)
             {
-                LineItems = lineItems,
-                Mode = "payment",
-                SuccessUrl = successUrl,
-                CancelUrl = cancelUrl,
-                ClientReferenceId = order.OrderID.ToString(),
-                PaymentIntentData = new SessionPaymentIntentDataOptions
+                eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", localizationService.GetString("custom.stripe.error.ordernotfound"));
+                return null;
+            }
+            var lineItems = GetLineItems(order);
+            if (lineItems.Count > 0 && !string.IsNullOrEmpty(successUrl) && !string.IsNullOrEmpty(cancelUrl))
+            {
+                var options = new SessionCreateOptions
                 {
-                    CaptureMethod = "manual",
-                }
-            };
-            return options;
+                    LineItems = lineItems,
+                    Mode = "payment",
+                    SuccessUrl = successUrl,
+                    CancelUrl = cancelUrl,
+                    ClientReferenceId = order.OrderID.ToString(),
+                    PaymentIntentData = new SessionPaymentIntentDataOptions
+                    {
+                        CaptureMethod = "manual",
+                    }
+                };
+
+                return options;
+            }
+            eventLogService.LogEvent(EventTypeEnum.Error, "Stripe", localizationService.GetString("custom.stripe.error.failedsessioncreateoptions"), $"Line Items count: {lineItems.Count},\r\nSuccess url: {successUrl},\r\nCancel url: {cancelUrl} ");
+            return null;
         }
 
 
@@ -63,7 +104,7 @@ namespace Custom.Xperience.Stripe
         protected virtual string CreateDescription(int orderId)
         {
             string description = String.Empty;
-            var orderItemsQuery = OrderItemInfo.Provider.Get()
+            var orderItemsQuery = orderItemInfoProvider.Get()
                 .Columns("OrderItemParentGUID", "OrderItemSKUName", "OrderItemGUID", "OrderItemOrderID")
                 .WhereEquals("OrderItemOrderID", orderId);
 
@@ -90,7 +131,7 @@ namespace Custom.Xperience.Stripe
                     description += name;
                 }
             }
-            return description.Equals(String.Empty) ? ResHelper.GetString("custom.stripe.checkout.defaultdescription") : description;
+            return description.Equals(String.Empty) ? localizationService.GetString("custom.stripe.checkout.defaultdescription") : description;
         }
 
 
@@ -98,24 +139,27 @@ namespace Custom.Xperience.Stripe
         protected virtual List<SessionLineItemOptions> GetLineItems(OrderInfo order)
         {
             var lineItems = new List<SessionLineItemOptions>();
-
-            //Only use one line - separate lines requires calculation to happen on Stripe side, which would negate Kentico calculation pipeline.
-            lineItems.Add(new SessionLineItemOptions
+            var currency = currencyInfoProvider.Get(order.OrderCurrencyID);
+            if (order != null && currency != null)
             {
-                PriceData = new SessionLineItemPriceDataOptions
+                //Only use one line - separate lines requires calculation to happen on Stripe side, which would negate Kentico calculation pipeline.
+                lineItems.Add(new SessionLineItemOptions
                 {
-                    Currency = CurrencyInfo.Provider.Get(order.OrderCurrencyID).CurrencyCode,
-                    ProductData = new SessionLineItemPriceDataProductDataOptions
+                    PriceData = new SessionLineItemPriceDataOptions
                     {
-                        Name = ResHelper.GetString("custom.stripe.checkout.paymentname"),
-                        Description = CreateDescription(order.OrderID)
-                    },
+                        Currency = currency.CurrencyCode,
+                        ProductData = new SessionLineItemPriceDataProductDataOptions
+                        {
+                            Name = localizationService.GetString("custom.stripe.checkout.paymentname"),
+                            Description = CreateDescription(order.OrderID)
+                        },
 
-                    //Stripe uses cents or analogous units of whichever currency is being used.
-                    UnitAmountDecimal = order.OrderGrandTotal * 100
-                },
-                Quantity = 1
-            });
+                        //Stripe uses cents or analogous units of whichever currency is being used.
+                        UnitAmountDecimal = order.OrderGrandTotal * 100
+                    },
+                    Quantity = 1
+                });
+            }
             return lineItems;
         }
     }
