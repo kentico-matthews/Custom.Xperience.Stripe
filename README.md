@@ -175,11 +175,11 @@ Many of the classes in this repository contain virtual members which can be over
 ### **Forking the repository**
 If your use case requires more in-depth or fundamental changes, you can fork (or just download and modify) the repository, and make whatever structural changes you need. 
 
-In this case, you'll need to add the live site and admin class library projects from the repository to the appropriate solutions in Visual Studio. Do the following for each of the two projects:
+In this case, you'll first need to open each project and restore nuget packages, and rebuild.
+
+Then, add the live site and admin class library projects from the repository to the appropriate solutions in Visual Studio. Do the following for each of the two projects:
 1. Right-click the solution and choose **Add > Existing Project**.
 1. Expand the main project of the solution (either the live site or admin WebApp). Here, you should either see a node for **Dependencies** or **References**, depending on the type of your project.
 1. Right click this node, and choose either **Add Reference...** or **Add Project Reference...**
 1. On the **Projects** tab of the resulting modal window, make sure that the checkbox next to the class library project is selected.
 1. Click **Ok** to close the modal.
-
-You may also need to open the individual downloaded projects/solutions and restore their nuget packages before rebuilding.
